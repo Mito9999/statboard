@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { headersArray, API_URL } from "./fetchVariables.js";
+import "./App.css";
 
 const userID = 2069581;
 
@@ -35,9 +36,24 @@ function App() {
 
     return (
         <div>{jsonData ? (
-            <div>
-                <div>Total Tests: {jsonData.languages_sorted[0][0].anzahl}</div>
-                <div>Average: {jsonData.avg_norm}wpm</div>
+            <div class="card">
+                <div class="card--title">
+                    10fastfingers.com
+                </div>
+                <div class="card--data">
+                    <div>
+                        <span>
+                            {jsonData.languages_sorted[0][0].anzahl}
+                        </span>
+                        TESTS
+                    </div>
+                    <div>
+                        <span>
+                            {jsonData.avg_norm}
+                        </span>
+                        WPM
+                    </div>
+                </div>
             </div>
         ) : "Loading..."}</div>
     );
