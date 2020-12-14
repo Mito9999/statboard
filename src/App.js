@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { headersArray, API_URL } from "./fetchVariables.js";
+import Card from "./Card";
 import "./App.css";
 
 const userID = 2069581;
@@ -35,27 +36,18 @@ function App() {
     }, []);
 
     return (
-        <div>{jsonData ? (
-            <div class="card">
-                <div class="card--title">
-                    10fastfingers.com
-                </div>
-                <div class="card--data">
-                    <div>
-                        <span>
-                            {jsonData.languages_sorted[0][0].anzahl}
-                        </span>
-                        TESTS
-                    </div>
-                    <div>
-                        <span>
-                            {jsonData.avg_norm}
-                        </span>
-                        WPM
-                    </div>
-                </div>
-            </div>
-        ) : "Loading..."}</div>
+        <div className="all-cards">
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+        </div>
     );
 }
 
