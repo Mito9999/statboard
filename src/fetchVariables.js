@@ -8,7 +8,7 @@ export const headersArray = [
     ["sec-fetch-site", "same-origin"],
     ["sec-fetch-mode", "cors"],
     ["sec-fetch-dest", "empty"],
-    ["referer", "https://10fastfingers.com/user/2069581/"],
+    ["referer", "https://10fastfingers.com/user/"],
     ["accept-language", "en-US,en;q=0.9"],
     ["cookie", "__cfduid=d8d03cd3b59500b5e12e5d5e5931430411607716490; CakeCookie[lang]=Q2FrZQ%3D%3D.5exP; CookieConsent={stamp:%27ZILwVWJ70LddDZUccMG8zwtvt84t1tIc0FAG0nQBKuaeIVWkbx9BhQ==%27%2Cnecessary:true%2Cpreferences:true%2Cstatistics:true%2Cmarketing:true%2Cver:2%2Cutc:1607716497019%2Cregion:%27us%27}; CakeCookie[alternate_language_suggestion]=Q2FrZQ%3D%3D.9PBdWA%3D%3D; CAKEPHP=bbapaahfpjv2r4h99971j0gk3p; CakeCookie[remember_me_cookie]=Q2FrZQ%3D%3D.4%2BAdDjQx4RDhjpVCrlBg7%2FJ3dr20aOIJiu4S1%2BjQI0J4qakslXTmYw%3D%3D"]
 ];

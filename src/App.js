@@ -1,63 +1,69 @@
-import React, { useState, useEffect } from "react";
-import { headersArray, API_URL } from "./fetchVariables.js";
+import React, { useState } from "react";
 import Card from "./Card";
+import AddModal from "./AddModal";
 import "./App.css";
 
-const userID = 2069581;
-
 function App() {
-    const [jsonData, setJsonData] = useState(null);
+    const [formData, setFormData] = useState({ ID: "" });
 
-    const getData = async () => {
-        let myHeaders = new Headers();
-
-        headersArray.forEach((header) => {
-            myHeaders.append(header[0], header[1]);
-        });
-
-        const { min_norm, max_norm, avg_norm, languages_sorted } = await fetch(
-            API_URL + userID,
-            {
-                method: "POST",
-                headers: myHeaders,
-                redirect: "follow",
-            }
-        )
-            .then((response) => response.json())
-            .catch((error) => console.log("error", error));
-
-        const filtered = { min_norm, max_norm, avg_norm, languages_sorted };
-
-        return filtered;
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
     };
 
-    useEffect(() => {
-        console.log("App is in development mode");
-        // stores response from 10ff to localstorage for development to prevent multiple unnecessary requests
-        (async () => {
-            const data = localStorage.getItem("jsonData") ? JSON.parse(localStorage.getItem("jsonData")) : await getData();
-            const { min_norm, max_norm, avg_norm, languages_sorted } = data;
-            const filtered = { min_norm, max_norm, avg_norm, languages_sorted };
-            setJsonData(filtered);
-        })();
-    }, []);
+    const [cards, setCards] = useState([
+        {
+            site: "10fastfingers",
+            id: 2069581,
+        },
+    ]);
 
-    useEffect(() => {
-        localStorage.setItem("jsonData", JSON.stringify(jsonData))
-    }, [jsonData])
+    const makeNewCard = (e) => {
+        e.preventDefault();
+        setCards((prev) => [
+            ...prev,
+            {
+                site: "10fastfingers",
+                id: formData.ID,
+            },
+        ]);
+
+    };
+
+    const addCard = () => {
+        setIsModalOpen(true);
+    };
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="all-cards">
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
-            {jsonData ? <Card jsonData={jsonData} /> : "Loading..."}
+            {cards.map((cardInfo, index) => <Card key={index} cardInfo={cardInfo} />)}
+            <div
+                className="card"
+                style={{ cursor: "pointer" }}
+                onClick={addCard}
+            >
+                <div className="card--data">
+                    <div className={"card--add"}>+</div>
+                </div>
+            </div>
+            <AddModal open={isModalOpen} close={() => setIsModalOpen(false)}>
+                <h1>10FastFingers</h1>
+                ID:
+                <form>
+                    <input
+                        type="text"
+                        name="ID"
+                        value={formData.ID}
+                        onChange={handleChange}
+                    />
+                    <button onClick={makeNewCard}>Add</button>
+                </form>
+            </AddModal>
         </div>
     );
 }
