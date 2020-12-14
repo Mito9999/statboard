@@ -28,12 +28,23 @@ function App() {
 
         const filtered = { min_norm, max_norm, avg_norm, languages_sorted };
 
-        setJsonData(filtered);
+        return filtered;
     };
 
     useEffect(() => {
-        getData();
+        console.log("App is in development mode");
+        // stores response from 10ff to localstorage for development to prevent multiple unnecessary requests
+        (async () => {
+            const data = localStorage.getItem("jsonData") ? JSON.parse(localStorage.getItem("jsonData")) : await getData();
+            const { min_norm, max_norm, avg_norm, languages_sorted } = data;
+            const filtered = { min_norm, max_norm, avg_norm, languages_sorted };
+            setJsonData(filtered);
+        })();
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem("jsonData", JSON.stringify(jsonData))
+    }, [jsonData])
 
     return (
         <div className="all-cards">

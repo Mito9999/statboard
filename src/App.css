@@ -1,10 +1,10 @@
 .all-cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
 .card {
+    flex: 1 0 200px;
     min-width: 200px;
     height: 200px;
     margin: 1em;
@@ -28,10 +28,12 @@
 
 .card span {
     font-size: 2rem;
+    margin-right: 5px;
 }
 
 @media (max-width: 500px) {
     .card {
+        flex-basis: auto;
         width: 90%;
     }
 }
