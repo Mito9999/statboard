@@ -3,6 +3,7 @@ import { headersArray, API_URL } from "./fetchVariables.js";
 
 const Card = ({ cardInfo }) => {
     const [jsonData, setJsonData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const getData = async () => {
         let myHeaders = new Headers();
@@ -15,49 +16,80 @@ const Card = ({ cardInfo }) => {
             }
         });
 
-        const { min_norm, max_norm, avg_norm, languages_sorted } = await fetch(
-            API_URL + cardInfo.id,
-            {
-                method: "POST",
-                headers: myHeaders,
-                redirect: "follow",
-            }
-        )
-            .then((response) => response.json())
-            .catch((error) => console.log("error", error));
+        try {
+            const { avg_norm, languages_sorted } = await fetch(
+                API_URL + cardInfo.id,
+                {
+                    method: "POST",
+                    headers: myHeaders,
+                    redirect: "follow",
+                }
+            )
+                .then((response) => response.json())
+                .catch((error) => {
+                    console.log("FETCH_ERROR: ", error);
+                });
 
-        const filtered = { min_norm, max_norm, avg_norm, languages_sorted };
-
-        return filtered;
-    };
+            const filtered = { avg_norm, languages_sorted };
+            return filtered;
+        } catch (err) {
+            console.log("DATA_ERROR:" + err);
+            return ({
+                avg_norm: 0,
+                languages_sorted: [{
+                    "0": {
+                        "anzahl": "0"
+                    }
+                }],
+            });
+        }
+    }
 
     useEffect(() => {
         (async () => {
             const data = await getData();
-            const { min_norm, max_norm, avg_norm, languages_sorted } = data;
-            const filtered = { min_norm, max_norm, avg_norm, languages_sorted };
-            setJsonData(filtered);
+            try {
+                const { avg_norm, languages_sorted } = data;
+                const filtered = { avg_norm, languages_sorted };
+                console.log(filtered);
+                setJsonData(filtered);
+                setTimeout(() => { setLoading(false) }, 100);
+            } catch (err) {
+                console.log("MOUNT_ERROR:" + err);
+            }
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const showTests = () => {
+        try {
+            return jsonData.languages_sorted[0][0].anzahl;
+        } catch {
+            return "0";
+        }
+    }
 
     return (
         <>
-            { jsonData ? (
+            {(jsonData && !loading) ? (
                 <div className="card">
                     <div className="card--title">10fastfingers.com</div>
                     <div className="card--data">
                         <div>
                             <span>{jsonData.avg_norm}</span>
-                        WPM
-                    </div>
+                            WPM
+                        </div>
                         <div>
-                            <span>{jsonData.languages_sorted[0][0].anzahl}</span>
-                        TESTS
-                    </div>
+                            <span>
+                                {showTests()}
+                            </span>
+                            TESTS
+                        </div>
                     </div>
                 </div>
-            ) : "Loading..."
-            }
+            ) : loading ? (
+                "Loading..."
+            ) : null}
         </>
     );
 };

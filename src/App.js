@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import AddModal from "./AddModal";
 import "./App.css";
@@ -14,12 +14,18 @@ function App() {
         }));
     };
 
-    const [cards, setCards] = useState([
-        {
-            site: "10fastfingers",
-            id: 2069581,
-        },
-    ]);
+    const [cards, setCards] = useState(
+        JSON.parse(localStorage.getItem("cards")) || [
+            {
+                site: "10fastfingers",
+                id: 2069581,
+            },
+        ]
+    );
+
+    useEffect(() => {
+        localStorage.setItem("cards", JSON.stringify(cards));
+    }, [cards]);
 
     const makeNewCard = (e) => {
         e.preventDefault();
@@ -30,7 +36,6 @@ function App() {
                 id: formData.ID,
             },
         ]);
-
     };
 
     const addCard = () => {
@@ -41,7 +46,9 @@ function App() {
 
     return (
         <div className="all-cards">
-            {cards.map((cardInfo, index) => <Card key={index} cardInfo={cardInfo} />)}
+            {cards.map((cardInfo, index) => (
+                <Card key={index} cardInfo={cardInfo} />
+            ))}
             <div
                 className="card"
                 style={{ cursor: "pointer" }}
