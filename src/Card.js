@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { headersArray, API_URL } from "./fetchVariables.js";
 
-const Card = ({ cardInfo }) => {
+const Card = ({ cardInfo, removeCard }) => {
     const [jsonData, setJsonData] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -10,7 +10,7 @@ const Card = ({ cardInfo }) => {
 
         headersArray.forEach((header) => {
             if (header[0] === "referer") {
-                myHeaders.append(header[0], header[1] + cardInfo.id);
+                myHeaders.append(header[0], header[1] + cardInfo.data);
             } else {
                 myHeaders.append(header[0], header[1]);
             }
@@ -18,7 +18,7 @@ const Card = ({ cardInfo }) => {
 
         try {
             const { avg_norm, languages_sorted } = await fetch(
-                API_URL + cardInfo.id,
+                API_URL + cardInfo.data,
                 {
                     method: "POST",
                     headers: myHeaders,
@@ -34,16 +34,18 @@ const Card = ({ cardInfo }) => {
             return filtered;
         } catch (err) {
             console.log("DATA_ERROR:" + err);
-            return ({
+            return {
                 avg_norm: 0,
-                languages_sorted: [{
-                    "0": {
-                        "anzahl": "0"
-                    }
-                }],
-            });
+                languages_sorted: [
+                    {
+                        0: {
+                            anzahl: "0",
+                        },
+                    },
+                ],
+            };
         }
-    }
+    };
 
     useEffect(() => {
         (async () => {
@@ -51,9 +53,10 @@ const Card = ({ cardInfo }) => {
             try {
                 const { avg_norm, languages_sorted } = data;
                 const filtered = { avg_norm, languages_sorted };
-                console.log(filtered);
                 setJsonData(filtered);
-                setTimeout(() => { setLoading(false) }, 100);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 100);
             } catch (err) {
                 console.log("MOUNT_ERROR:" + err);
             }
@@ -67,12 +70,26 @@ const Card = ({ cardInfo }) => {
         } catch {
             return "0";
         }
-    }
+    };
+
+    const [hovered, setHovered] = useState(false);
 
     return (
         <>
-            {(jsonData && !loading) ? (
-                <div className="card">
+            {jsonData && !loading ? (
+                <div
+                    className="card"
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                >
+                    {hovered && (
+                        <div
+                            className="card--remove"
+                            onClick={() => removeCard(cardInfo.id)}
+                        >
+                            (X)
+                        </div>
+                    )}
                     <div className="card--title">10fastfingers.com</div>
                     <div className="card--data">
                         <div>
@@ -80,9 +97,7 @@ const Card = ({ cardInfo }) => {
                             WPM
                         </div>
                         <div>
-                            <span>
-                                {showTests()}
-                            </span>
+                            <span>{showTests()}</span>
                             TESTS
                         </div>
                     </div>

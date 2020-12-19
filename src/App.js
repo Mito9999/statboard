@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { nanoid } from 'nanoid'
 import Card from "./Card";
 import AddModal from "./AddModal";
 import "./App.css";
@@ -15,15 +16,19 @@ function App() {
     };
 
     const [cards, setCards] = useState(
-        JSON.parse(localStorage.getItem("cards")) || [
-            {
-                site: "10fastfingers",
-                id: 2069581,
-            },
-        ]
+        JSON.parse(localStorage.getItem("cards")).length > 0
+            ? JSON.parse(localStorage.getItem("cards"))
+            : [
+                {
+                    site: "10fastfingers",
+                    data: 2069581,
+                    id: nanoid()
+                },
+            ]
     );
 
     useEffect(() => {
+        console.log(cards);
         localStorage.setItem("cards", JSON.stringify(cards));
     }, [cards]);
 
@@ -33,26 +38,29 @@ function App() {
             ...prev,
             {
                 site: "10fastfingers",
-                id: formData.ID,
+                data: parseInt(formData.ID),
+                id: nanoid()
             },
         ]);
     };
 
-    const addCard = () => {
-        setIsModalOpen(true);
-    };
+    const removeCard = (cardID) => {
+        const filteredCards = cards.filter(card => card.id !== cardID);
+        console.log(filteredCards);
+        setCards(filteredCards);
+    }
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="all-cards">
-            {cards.map((cardInfo, index) => (
-                <Card key={index} cardInfo={cardInfo} />
+            {cards.map((cardInfo) => (
+                <Card key={cardInfo.id} cardInfo={cardInfo} removeCard={removeCard} />
             ))}
             <div
                 className="card"
                 style={{ cursor: "pointer" }}
-                onClick={addCard}
+                onClick={() => setIsModalOpen(true)}
             >
                 <div className="card--data">
                     <div className={"card--add"}>+</div>
