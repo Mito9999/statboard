@@ -78,18 +78,19 @@ const Card = ({ cardInfo, removeCard }) => {
         <>
             {jsonData && !loading ? (
                 <div
-                    className="card"
+                    className={`card ${hovered ? "hovered" : ""}`}
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
+                    onDoubleClick={() => removeCard(cardInfo.id)}
                 >
-                    {hovered && (
+                    {/* {hovered && (
                         <div
                             className="card--remove"
                             onClick={() => removeCard(cardInfo.id)}
                         >
                             (X)
                         </div>
-                    )}
+                    )} */}
                     <div className="card--title">10fastfingers.com</div>
                     <div className="card--data">
                         <div>

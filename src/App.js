@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { nanoid } from 'nanoid'
-import Card from "./Card";
+import { nanoid } from "nanoid";
+import TenFastFingers from "./TenFastFingers";
 import AddModal from "./AddModal";
 import "./App.css";
 
@@ -19,12 +19,12 @@ function App() {
         JSON.parse(localStorage.getItem("cards")).length > 0
             ? JSON.parse(localStorage.getItem("cards"))
             : [
-                {
-                    site: "10fastfingers",
-                    data: 2069581,
-                    id: nanoid()
-                },
-            ]
+                  {
+                      site: "10fastfingers",
+                      data: 2069581,
+                      id: nanoid(),
+                  },
+              ]
     );
 
     useEffect(() => {
@@ -39,23 +39,26 @@ function App() {
             {
                 site: "10fastfingers",
                 data: parseInt(formData.ID),
-                id: nanoid()
+                id: nanoid(),
             },
         ]);
     };
 
     const removeCard = (cardID) => {
-        const filteredCards = cards.filter(card => card.id !== cardID);
-        console.log(filteredCards);
+        const filteredCards = cards.filter((card) => card.id !== cardID);
         setCards(filteredCards);
-    }
+    };
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="all-cards">
             {cards.map((cardInfo) => (
-                <Card key={cardInfo.id} cardInfo={cardInfo} removeCard={removeCard} />
+                <TenFastFingers
+                    key={cardInfo.id}
+                    cardInfo={cardInfo}
+                    removeCard={removeCard}
+                />
             ))}
             <div
                 className="card"
