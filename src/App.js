@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-import TenFastFingers from "./TenFastFingers";
+import TenFastFingers from "./Card";
 import AddModal from "./AddModal";
 import "./App.css";
 
-function App() {
-    const [formData, setFormData] = useState({ ID: "" });
+const initialCards = [
+    {
+        site: "10fastfingers",
+        data: 2069581,
+        id: nanoid(),
+    },
+];
 
+function App() {
+    const [cards, setCards] = useState(
+        JSON.parse(localStorage.getItem("cards")).length > 0
+            ? JSON.parse(localStorage.getItem("cards"))
+            : initialCards
+    );
+
+    // Form and Modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [formData, setFormData] = useState({ ID: "" });
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -14,23 +29,6 @@ function App() {
             [name]: value,
         }));
     };
-
-    const [cards, setCards] = useState(
-        JSON.parse(localStorage.getItem("cards")).length > 0
-            ? JSON.parse(localStorage.getItem("cards"))
-            : [
-                  {
-                      site: "10fastfingers",
-                      data: 2069581,
-                      id: nanoid(),
-                  },
-              ]
-    );
-
-    useEffect(() => {
-        console.log(cards);
-        localStorage.setItem("cards", JSON.stringify(cards));
-    }, [cards]);
 
     const makeNewCard = (e) => {
         e.preventDefault();
@@ -44,12 +42,15 @@ function App() {
         ]);
     };
 
+    useEffect(() => {
+        console.log(cards);
+        localStorage.setItem("cards", JSON.stringify(cards));
+    }, [cards]);
+
     const removeCard = (cardID) => {
         const filteredCards = cards.filter((card) => card.id !== cardID);
         setCards(filteredCards);
     };
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="all-cards">
