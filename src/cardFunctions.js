@@ -77,3 +77,22 @@ export const tenfastfingers = (cardInfo) => {
     };
     return getData();
 };
+
+export const reddit = async (cardInfo) => {
+    const res = await fetch(
+        `https://www.reddit.com/user/${cardInfo.data}/about.json`
+    );
+    const {
+        data: { total_karma, inbox_count },
+    } = await res.json();
+    console.log(total_karma, inbox_count);
+    return [
+        <>{cardInfo.site}</>,
+        <>
+            <span>{total_karma}</span>KARMA
+        </>,
+        <>
+            <span></span>
+        </>,
+    ];
+};

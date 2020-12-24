@@ -21,7 +21,7 @@ function App() {
 
     // Form and Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState({ ID: "" });
+    const [formData, setFormData] = useState({ site: "", data: "" });
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -35,8 +35,8 @@ function App() {
         setCards((prev) => [
             ...prev,
             {
-                site: "10fastfingers",
-                data: parseInt(formData.ID),
+                site: formData.site,
+                data: formData.data,
                 id: nanoid(),
             },
         ]);
@@ -71,13 +71,20 @@ function App() {
                 </div>
             </div>
             <AddModal open={isModalOpen} close={() => setIsModalOpen(false)}>
-                <h1>10FastFingers</h1>
-                ID:
+                <h1>Add</h1>
+                <select
+                    name="site"
+                    value={formData.site}
+                    onChange={handleChange}
+                >
+                    <option value="10fastfingers">10fastfingers</option>
+                    <option value="reddit">reddit</option>
+                </select>
                 <form>
                     <input
                         type="text"
-                        name="ID"
-                        value={formData.ID}
+                        name="data"
+                        value={formData.data}
                         onChange={handleChange}
                     />
                     <button onClick={makeNewCard}>Add</button>
