@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
-import TenFastFingers from "./Card";
+import Card from "./Card";
 import AddModal from "./AddModal";
 import "./App.css";
 
@@ -55,7 +55,7 @@ function App() {
     return (
         <div className="all-cards">
             {cards.map((cardInfo) => (
-                <TenFastFingers
+                <Card
                     key={cardInfo.id}
                     cardInfo={cardInfo}
                     removeCard={removeCard}

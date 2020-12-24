@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { tenfastfingers } from "./cardFunctions";
 
+const handleEmptyData = (text = "Error") => {
+    return [<>{text}</>, <>{text}</>, <>{text}</>];
+};
+
 const Card = ({ cardInfo, removeCard }) => {
-    const [data, setData] = useState([
-        <>Loading...</>,
-        <>Loading...</>,
-        <>Loading...</>,
-    ]);
+    const [data, setData] = useState(handleEmptyData("Loading..."));
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await tenfastfingers(cardInfo);
+                let siteFunction = () => {};
+                let isValidSite = true;
+                switch (cardInfo.site) {
+                    case "10fastfingers":
+                        siteFunction = tenfastfingers;
+                        break;
+                    default:
+                        isValidSite = false;
+                        break;
+                }
+                const res = await (isValidSite
+                    ? siteFunction(cardInfo)
+                    : handleEmptyData());
+
                 setData(res);
             } catch (err) {
                 console.log("MOUNT_ERROR:" + err);
