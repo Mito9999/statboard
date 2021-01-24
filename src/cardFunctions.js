@@ -1,4 +1,5 @@
 import React from "react";
+import { handleEmptyData } from "./utils";
 
 export const tenfastfingers = (cardInfo) => {
     const headersArray = [
@@ -65,37 +66,32 @@ export const tenfastfingers = (cardInfo) => {
             ];
         } catch (err) {
             console.log("DATA_ERROR:" + err);
-            return [
-                <>tenfastfingers</>,
-                <>
-                    <span>0</span>WPM
-                </>,
-                <>
-                    <span>0</span>TESTS
-                </>,
-            ];
+            return handleEmptyData();
         }
     };
     return getData();
 };
 
 export const reddit = async (cardInfo) => {
-    const res = await fetch(
-        `https://www.reddit.com/user/${cardInfo.data}/about.json`
-    );
-    const {
-        data: { total_karma, inbox_count },
-    } = await res.json();
-    console.log(total_karma, inbox_count);
-    return [
-        <>{cardInfo.site}</>,
-        <>
-            <span>{total_karma}</span>KARMA
-        </>,
-        <>
-            <span></span>
-        </>,
-    ];
+    try {
+        const res = await fetch(
+            `https://www.reddit.com/user/${cardInfo.data}/about.json`
+        );
+        const {
+            data: { total_karma },
+        } = await res.json();
+        return [
+            <>{cardInfo.site}</>,
+            <>
+                <span>{total_karma}</span>KARMA
+            </>,
+            <>
+                <span></span>
+            </>,
+        ];
+    } catch {
+        return handleEmptyData();
+    }
 };
 
 export const ethermine = (cardInfo) => {
@@ -105,7 +101,6 @@ export const ethermine = (cardInfo) => {
                 `https://api.ethermine.org/miner/${cardInfo.data}/currentStats`
             );
             const res = await data.json();
-            console.log(res);
             return [
                 <>{cardInfo.site}</>,
                 <>
@@ -121,8 +116,8 @@ export const ethermine = (cardInfo) => {
                     ETH
                 </>,
             ];
-        } catch (err) {
-            console.log("DATA_ERROR:" + err);
+        } catch {
+            return handleEmptyData();
         }
     })();
 };

@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { tenfastfingers, reddit, ethermine } from "./cardFunctions";
-
-const handleEmptyData = (text = "Error") => {
-    return [<>{text}</>, <>{text}</>, <>{text}</>];
-};
+import { handleEmptyData } from "./utils";
 
 const Card = ({ cardInfo, removeCard }) => {
     const [data, setData] = useState(handleEmptyData("Loading..."));
@@ -32,7 +29,6 @@ const Card = ({ cardInfo, removeCard }) => {
                 const res = await (isValidSite
                     ? siteFunction(cardInfo)
                     : handleEmptyData());
-                console.log("RES: ", res);
                 setData(res);
             } catch (err) {
                 console.log("MOUNT_ERROR:" + err);
