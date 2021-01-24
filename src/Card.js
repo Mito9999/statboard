@@ -8,9 +8,8 @@ const Card = ({ cardInfo, removeCard }) => {
     useEffect(() => {
         (async () => {
             try {
-                const asdfjkl = await SITE_INFO[cardInfo.site].fn(cardInfo);
-                console.log(asdfjkl);
-                setData(asdfjkl);
+                const siteInfo = await SITE_INFO[cardInfo.site].fn(cardInfo);
+                setData(siteInfo);
             } catch (err) {
                 setData(handleEmptyData());
                 console.log(err);
