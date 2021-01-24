@@ -4,6 +4,8 @@ import Card from "./Card";
 import AddModal from "./AddModal";
 import "./App.css";
 
+import { SITE_INFO } from "./cardFunctions";
+
 const initialCards = [
     {
         site: "10fastfingers",
@@ -99,6 +101,7 @@ function App() {
                         name="data"
                         value={formData.data}
                         onChange={handleChange}
+                        placeholder={SITE_INFO[formData.site].dataType}
                     />
                     <button onClick={makeNewCard}>Add</button>
                 </form>
