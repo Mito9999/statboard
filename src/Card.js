@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { tenfastfingers, reddit, ethermine } from "./cardFunctions";
+import { SITE_INFO } from "./cardFunctions";
 import { handleEmptyData } from "./utils";
 
 const Card = ({ cardInfo, removeCard }) => {
@@ -8,30 +8,12 @@ const Card = ({ cardInfo, removeCard }) => {
     useEffect(() => {
         (async () => {
             try {
-                let siteFunction = () => {};
-                let isValidSite = true;
-
-                switch (cardInfo.site) {
-                    case "10fastfingers":
-                        siteFunction = tenfastfingers;
-                        break;
-                    case "reddit":
-                        siteFunction = reddit;
-                        break;
-                    case "ethermine":
-                        siteFunction = ethermine;
-                        break;
-                    default:
-                        isValidSite = false;
-                        break;
-                }
-
-                const res = await (isValidSite
-                    ? siteFunction(cardInfo)
-                    : handleEmptyData());
-                setData(res);
+                const asdfjkl = await SITE_INFO[cardInfo.site].fn(cardInfo);
+                console.log(asdfjkl);
+                setData(asdfjkl);
             } catch (err) {
-                console.log("MOUNT_ERROR:" + err);
+                setData(handleEmptyData());
+                console.log(err);
             }
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps

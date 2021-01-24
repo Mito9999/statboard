@@ -7,7 +7,7 @@ import "./App.css";
 const initialCards = [
     {
         site: "10fastfingers",
-        data: 2069581,
+        data: "2069581",
         dataType: "Account ID",
         id: nanoid(),
     },
@@ -30,7 +30,10 @@ function App() {
 
     // Form and Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState({ site: "", data: "" });
+    const [formData, setFormData] = useState({
+        site: "10fastfingers",
+        data: "",
+    });
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({

@@ -1,7 +1,7 @@
 import React from "react";
 import { handleEmptyData } from "./utils";
 
-export const tenfastfingers = (cardInfo) => {
+const tenfastfingers = (cardInfo) => {
     const headersArray = [
         ["authority", "10fastfingers.com"],
         ["content-length", "0"],
@@ -72,7 +72,7 @@ export const tenfastfingers = (cardInfo) => {
     return getData();
 };
 
-export const reddit = async (cardInfo) => {
+const reddit = async (cardInfo) => {
     try {
         const res = await fetch(
             `https://www.reddit.com/user/${cardInfo.data}/about.json`
@@ -94,7 +94,7 @@ export const reddit = async (cardInfo) => {
     }
 };
 
-export const ethermine = (cardInfo) => {
+const ethermine = (cardInfo) => {
     return (async () => {
         try {
             const data = await fetch(
@@ -120,4 +120,19 @@ export const ethermine = (cardInfo) => {
             return handleEmptyData();
         }
     })();
+};
+
+export const SITE_INFO = {
+    "10fastfingers": {
+        fn: tenfastfingers,
+        dataType: "Account ID",
+    },
+    reddit: {
+        fn: reddit,
+        dataType: "Username",
+    },
+    ethermine: {
+        fn: ethermine,
+        dataType: "Wallet Address",
+    },
 };
