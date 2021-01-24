@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { tenfastfingers, reddit } from "./cardFunctions";
+import { tenfastfingers, reddit, ethermine } from "./cardFunctions";
 
 const handleEmptyData = (text = "Error") => {
     return [<>{text}</>, <>{text}</>, <>{text}</>];
@@ -21,6 +21,9 @@ const Card = ({ cardInfo, removeCard }) => {
                     case "reddit":
                         siteFunction = reddit;
                         break;
+                    case "ethermine":
+                        siteFunction = ethermine;
+                        break;
                     default:
                         isValidSite = false;
                         break;
@@ -29,6 +32,7 @@ const Card = ({ cardInfo, removeCard }) => {
                 const res = await (isValidSite
                     ? siteFunction(cardInfo)
                     : handleEmptyData());
+                console.log("RES: ", res);
                 setData(res);
             } catch (err) {
                 console.log("MOUNT_ERROR:" + err);

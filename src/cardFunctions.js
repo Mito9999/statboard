@@ -66,6 +66,7 @@ export const tenfastfingers = (cardInfo) => {
         } catch (err) {
             console.log("DATA_ERROR:" + err);
             return [
+                <>tenfastfingers</>,
                 <>
                     <span>0</span>WPM
                 </>,
@@ -95,4 +96,33 @@ export const reddit = async (cardInfo) => {
             <span></span>
         </>,
     ];
+};
+
+export const ethermine = (cardInfo) => {
+    return (async () => {
+        try {
+            const data = await fetch(
+                `https://api.ethermine.org/miner/${cardInfo.data}/currentStats`
+            );
+            const res = await data.json();
+            console.log(res);
+            return [
+                <>{cardInfo.site}</>,
+                <>
+                    <span>
+                        {Math.round(res.data.currentHashrate / 1000000)}
+                    </span>
+                    MH/s
+                </>,
+                <>
+                    <span>
+                        {(res.data.unpaid / 1000000000000000000).toFixed(5)}
+                    </span>
+                    ETH
+                </>,
+            ];
+        } catch (err) {
+            console.log("DATA_ERROR:" + err);
+        }
+    })();
 };

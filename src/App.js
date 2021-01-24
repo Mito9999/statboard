@@ -8,13 +8,22 @@ const initialCards = [
     {
         site: "10fastfingers",
         data: 2069581,
+        dataType: "Account ID",
         id: nanoid(),
     },
 ];
 
+const getCardsLengthFromStorage = () => {
+    try {
+        return JSON.parse(localStorage.getItem("cards")).length;
+    } catch {
+        return 0;
+    }
+};
+
 function App() {
     const [cards, setCards] = useState(
-        JSON.parse(localStorage.getItem("cards")).length > 0
+        getCardsLengthFromStorage() > 0
             ? JSON.parse(localStorage.getItem("cards"))
             : initialCards
     );
@@ -79,6 +88,7 @@ function App() {
                 >
                     <option value="10fastfingers">10fastfingers</option>
                     <option value="reddit">reddit</option>
+                    <option value="ethermine">ethermine</option>
                 </select>
                 <form>
                     <input
