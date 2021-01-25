@@ -1,11 +1,11 @@
-export const handleEmptyData = (text = "Error", text2 = text, text3 = text) => {
-    return [<>{text}</>, <>{text2}</>, <>{text3}</>];
-};
-
-const resolve = (path, obj) => {
+const stringToObjectProperty = (path, obj) => {
     return path
         .split(".")
         .reduce((prev, curr) => (prev ? prev[curr] : null), obj);
+};
+
+export const handleEmptyData = (text = "Error", text2 = text, text3 = text) => {
+    return [<>{text}</>, <>{text2}</>, <>{text3}</>];
 };
 
 export const createCardFunction = (URL, cardInfo, texts) => {
@@ -14,14 +14,22 @@ export const createCardFunction = (URL, cardInfo, texts) => {
             const data = await fetch(URL);
             const res = await data.json();
 
+            if (Object.values(texts).length !== 2) {
+                console.error("Must pass 2 key/value pairs into 'texts'");
+            }
+
             return [
                 <>{cardInfo.site}</>,
                 <>
-                    <span>{resolve(Object.keys(texts)[0], res)}</span>
+                    <span>
+                        {stringToObjectProperty(Object.keys(texts)[0], res)}
+                    </span>
                     {Object.values(texts)[0]}
                 </>,
                 <>
-                    <span>{resolve(Object.keys(texts)[1], res)}</span>
+                    <span>
+                        {stringToObjectProperty(Object.keys(texts)[1], res)}
+                    </span>
                     {Object.values(texts)[1]}
                 </>,
             ];

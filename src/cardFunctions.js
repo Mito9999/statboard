@@ -41,11 +41,7 @@ const tenfastfingers = (cardInfo) => {
                     headers: myHeaders,
                     redirect: "follow",
                 }
-            )
-                .then((response) => response.json())
-                .catch((error) => {
-                    console.log("FETCH_ERROR: ", error);
-                });
+            ).then((response) => response.json());
 
             const showTests = () => {
                 try {
@@ -64,8 +60,7 @@ const tenfastfingers = (cardInfo) => {
                     <span>{showTests()}</span>TESTS
                 </>,
             ];
-        } catch (err) {
-            console.log("DATA_ERROR:" + err);
+        } catch {
             return handleEmptyData();
         }
     };
