@@ -1,5 +1,5 @@
 import React from "react";
-import { handleEmptyData } from "./utils";
+import { handleEmptyData, createCardFunction } from "./utils";
 
 const tenfastfingers = (cardInfo) => {
     const headersArray = [
@@ -72,27 +72,15 @@ const tenfastfingers = (cardInfo) => {
     return getData();
 };
 
-const reddit = async (cardInfo) => {
-    try {
-        const res = await fetch(
-            `https://www.reddit.com/user/${cardInfo.data}/about.json`
-        );
-        const {
-            data: { total_karma },
-        } = await res.json();
-        return [
-            <>{cardInfo.site}</>,
-            <>
-                <span>{total_karma}</span>KARMA
-            </>,
-            <>
-                <span></span>
-            </>,
-        ];
-    } catch {
-        return handleEmptyData();
-    }
-};
+const reddit = async (cardInfo) =>
+    createCardFunction(
+        `https://www.reddit.com/user/${cardInfo.data}/about.json`,
+        cardInfo,
+        {
+            "data.total_karma": "KARMA",
+            "": "",
+        }
+    );
 
 const ethermine = (cardInfo) => {
     return (async () => {
@@ -133,7 +121,7 @@ const ethereum = (cardInfo) => {
                 <>{cardInfo.site}</>,
                 <>
                     <span>
-                        <span class="dollar">$</span>
+                        <span className="dollar">$</span>
                         {(res.ethPrice.rate * res.balance).toFixed(2)}
                     </span>
                     USD
