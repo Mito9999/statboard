@@ -105,7 +105,7 @@ const ethermine = (cardInfo) => {
                 <>{cardInfo.site}</>,
                 <>
                     <span>
-                        {Math.round(res.data.currentHashrate / 1000000)}
+                        {Math.round(res.data.reportedHashrate / 1000000)}
                     </span>
                     MH/s
                 </>,
@@ -113,6 +113,33 @@ const ethermine = (cardInfo) => {
                     <span>
                         {(res.data.unpaid / 1000000000000000000).toFixed(5)}
                     </span>
+                    ETH
+                </>,
+            ];
+        } catch {
+            return handleEmptyData();
+        }
+    })();
+};
+
+const ethereum = (cardInfo) => {
+    return (async () => {
+        try {
+            const data = await fetch(
+                `https://ethplorer.io/service/service.php?data=${cardInfo.data}`
+            );
+            const res = await data.json();
+            return [
+                <>{cardInfo.site}</>,
+                <>
+                    <span>
+                        <span class="dollar">$</span>
+                        {(res.ethPrice.rate * res.balance).toFixed(2)}
+                    </span>
+                    USD
+                </>,
+                <>
+                    <span>{res.balance.toFixed(5)}</span>
                     ETH
                 </>,
             ];
@@ -133,6 +160,10 @@ export const SITE_INFO = {
     },
     ethermine: {
         fn: ethermine,
+        dataType: "Wallet Address",
+    },
+    ethereum: {
+        fn: ethereum,
         dataType: "Wallet Address",
     },
 };

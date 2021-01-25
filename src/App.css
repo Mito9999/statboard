@@ -37,6 +37,10 @@
     margin-right: 5px;
 }
 
+span .dollar {
+    font-size: 1.5rem;
+}
+
 .card--add {
     font-size: 70px;
     user-select: none;

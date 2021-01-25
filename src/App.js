@@ -94,6 +94,7 @@ function App() {
                     <option value="10fastfingers">10fastfingers</option>
                     <option value="reddit">reddit</option>
                     <option value="ethermine">ethermine</option>
+                    <option value="ethereum">ethereum</option>
                 </select>
                 <form>
                     <input
