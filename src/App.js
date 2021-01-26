@@ -9,8 +9,8 @@ import { SITE_INFO } from "./cardFunctions";
 const initialCards = [
     {
         site: "10fastfingers",
-        data: "2069581",
-        dataType: "Account ID",
+        data: ["2069581"],
+        dataTypes: ["Account ID"],
         id: nanoid(),
     },
 ];
@@ -34,14 +34,22 @@ function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         site: "10fastfingers",
-        data: "",
+        data: [],
     });
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         setFormData((prev) => ({
             ...prev,
             [name]: value,
         }));
+
+        if (name === "site") {
+            setFormData((prev) => ({
+                ...prev,
+                data: [],
+            }));
+        }
     };
 
     const makeNewCard = (e) => {
@@ -64,6 +72,19 @@ function App() {
     const removeCard = (cardID) => {
         const filteredCards = cards.filter((card) => card.id !== cardID);
         setCards(filteredCards);
+    };
+
+    const handleSiteInputChange = (e) => {
+        const { name, value } = e.target;
+        // name is an integer, for indexing
+
+        const newData = [...formData.data];
+        newData[parseInt(name)] = value;
+
+        setFormData((prev) => ({
+            ...prev,
+            data: newData,
+        }));
     };
 
     return (
@@ -91,19 +112,22 @@ function App() {
                     value={formData.site}
                     onChange={handleChange}
                 >
-                    <option value="10fastfingers">10fastfingers</option>
-                    <option value="reddit">reddit</option>
-                    <option value="ethermine">ethermine</option>
-                    <option value="ethereum">ethereum</option>
+                    {Object.entries(SITE_INFO).map((siteValue) => (
+                        <option value={siteValue[0]}>{siteValue[0]}</option>
+                    ))}
                 </select>
                 <form>
-                    <input
-                        type="text"
-                        name="data"
-                        value={formData.data}
-                        onChange={handleChange}
-                        placeholder={SITE_INFO[formData.site].dataType}
-                    />
+                    {SITE_INFO[formData.site].dataTypes.map(
+                        (dataType, index) => (
+                            <input
+                                type="text"
+                                name={index}
+                                value={formData.data[index]}
+                                onChange={handleSiteInputChange}
+                                placeholder={dataType}
+                            />
+                        )
+                    )}
                     <button onClick={makeNewCard}>Add</button>
                 </form>
             </AddModal>

@@ -27,7 +27,7 @@ const tenfastfingers = (cardInfo) => {
 
         headersArray.forEach((header) => {
             if (header[0] === "referer") {
-                myHeaders.append(header[0], header[1] + cardInfo.data);
+                myHeaders.append(header[0], header[1] + cardInfo.data[0]);
             } else {
                 myHeaders.append(header[0], header[1]);
             }
@@ -35,7 +35,7 @@ const tenfastfingers = (cardInfo) => {
 
         try {
             const { avg_norm, languages_sorted } = await fetch(
-                API_URL + cardInfo.data,
+                API_URL + cardInfo.data[0],
                 {
                     method: "POST",
                     headers: myHeaders,
@@ -69,7 +69,7 @@ const tenfastfingers = (cardInfo) => {
 
 const reddit = async (cardInfo) =>
     createCardFunction(
-        `https://www.reddit.com/user/${cardInfo.data}/about.json`,
+        `https://www.reddit.com/user/${cardInfo.data[0]}/about.json`,
         cardInfo,
         {
             "data.total_karma": "KARMA",
@@ -81,7 +81,7 @@ const ethermine = (cardInfo) => {
     return (async () => {
         try {
             const data = await fetch(
-                `https://api.ethermine.org/miner/${cardInfo.data}/currentStats`
+                `https://api.ethermine.org/miner/${cardInfo.data[0]}/currentStats`
             );
             const res = await data.json();
             return [
@@ -109,7 +109,7 @@ const ethereum = (cardInfo) => {
     return (async () => {
         try {
             const data = await fetch(
-                `https://ethplorer.io/service/service.php?data=${cardInfo.data}`
+                `https://ethplorer.io/service/service.php?data=${cardInfo.data[0]}`
             );
             const res = await data.json();
             return [
@@ -132,21 +132,38 @@ const ethereum = (cardInfo) => {
     })();
 };
 
+const mee6 = (cardInfo) => {
+    // placeholder for now
+    return [
+        <>{cardInfo.site}</>,
+        <>
+            <span>{cardInfo.data[0]}</span>XP
+        </>,
+        <>
+            <span> {cardInfo.data[1]}</span>RANK
+        </>,
+    ];
+};
+
 export const SITE_INFO = {
     "10fastfingers": {
         fn: tenfastfingers,
-        dataType: "Account ID",
+        dataTypes: ["Account ID"],
     },
     reddit: {
         fn: reddit,
-        dataType: "Username",
+        dataTypes: ["Username"],
     },
     ethermine: {
         fn: ethermine,
-        dataType: "Wallet Address",
+        dataTypes: ["Wallet Address"],
     },
     ethereum: {
         fn: ethereum,
-        dataType: "Wallet Address",
+        dataTypes: ["Wallet Address"],
+    },
+    mee6: {
+        fn: mee6,
+        dataTypes: ["Server ID", "User ID"],
     },
 };
