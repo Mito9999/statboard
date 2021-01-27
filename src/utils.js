@@ -10,10 +10,10 @@ export const numberToOrdinalSuffix = (number) => {
         type: "ordinal",
     });
     const suffixes = {
-        one: "ST",
-        two: "ND",
+        one: "st",
+        two: "nd",
         few: "rd",
-        other: "TH",
+        other: "th",
     };
     return suffixes[ordinalRules.select(number)];
 };

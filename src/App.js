@@ -8,37 +8,30 @@ import { SITE_INFO } from "./cardFunctions";
 
 const initialCards = [
     {
-        site: "10fastfingers",
-        data: ["2069581"],
-        dataTypes: ["Account ID"],
+        site: "ethereum",
+        data: ["0x5fa22d211d9f8d4cb094807ff8c468e664f18c97"],
         id: nanoid(),
     },
 ];
 
-const getCardsLengthFromStorage = () => {
+const getCardsFromStorage = () => {
     try {
-        return JSON.parse(localStorage.getItem("cards")).length;
+        const cardsFromStorage = JSON.parse(localStorage.getItem("cards"));
+        return cardsFromStorage.length > 0 ? cardsFromStorage : initialCards;
     } catch {
-        return 0;
+        return initialCards;
     }
 };
 
 function App() {
-    const [cards, setCards] = useState(
-        getCardsLengthFromStorage() > 0
-            ? JSON.parse(localStorage.getItem("cards"))
-            : initialCards
-    );
+    const [cards, setCards] = useState(getCardsFromStorage());
 
-    // Form and Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         site: "10fastfingers",
         data: [],
     });
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
+    const handleChange = ({ target: { name, value } }) => {
         setFormData((prev) => ({
             ...prev,
             [name]: value,
@@ -50,6 +43,18 @@ function App() {
                 data: [],
             }));
         }
+    };
+
+    const handleSiteInputChange = (e, index) => {
+        const { value } = e.target;
+
+        const newData = [...formData.data];
+        newData[index] = value;
+
+        setFormData((prev) => ({
+            ...prev,
+            data: newData,
+        }));
     };
 
     const makeNewCard = (e) => {
@@ -64,27 +69,15 @@ function App() {
         ]);
     };
 
-    useEffect(() => {
-        console.log(cards);
-        localStorage.setItem("cards", JSON.stringify(cards));
-    }, [cards]);
-
     const removeCard = (cardID) => {
         const filteredCards = cards.filter((card) => card.id !== cardID);
         setCards(filteredCards);
     };
 
-    const handleSiteInputChange = ({ target: { name, value } }) => {
-        // name is a (string number casted to) integer, for indexing
-
-        const newData = [...formData.data];
-        newData[parseInt(name)] = value;
-
-        setFormData((prev) => ({
-            ...prev,
-            data: newData,
-        }));
-    };
+    useEffect(() => {
+        localStorage.setItem("cards", JSON.stringify(cards));
+        console.log(cards);
+    }, [cards]);
 
     return (
         <div className="all-cards">
@@ -120,9 +113,11 @@ function App() {
                         (dataType, index) => (
                             <input
                                 type="text"
-                                name={index}
-                                value={formData.data[index] || ""}
-                                onChange={handleSiteInputChange}
+                                defaultValue=""
+                                value={formData.data[index]}
+                                onChange={(e) => {
+                                    handleSiteInputChange(e, index);
+                                }}
                                 placeholder={dataType}
                             />
                         )

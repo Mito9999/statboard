@@ -157,8 +157,8 @@ const mee6 = (cardInfo) => {
             return [
                 <>{cardInfo.site}</>,
                 <>
-                    <span>{user.level}</span>
-                    LEVEL
+                    <span>{user.message_count}</span>
+                    MESSAGES
                 </>,
                 <>
                     <span>{ranking + rankingText}</span>
