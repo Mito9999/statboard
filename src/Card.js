@@ -3,9 +3,11 @@ import { SITE_INFO } from "./cardFunctions";
 import { handleEmptyData } from "./utils";
 
 import RefreshIcon from "@material-ui/icons/Refresh";
+import CloseIcon from "@material-ui/icons/Close";
 
 const Card = ({ cardInfo, removeCard }) => {
     const [data, setData] = useState(handleEmptyData("Loading..."));
+    const [hovered, setHovered] = useState(false);
 
     const getAndSetData = async () => {
         try {
@@ -22,23 +24,26 @@ const Card = ({ cardInfo, removeCard }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const [hovered, setHovered] = useState(false);
-
     return (
         <>
             <div
                 className={`card ${hovered ? "hovered" : ""}`}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
-                onDoubleClick={() => removeCard(cardInfo.id)}
             >
-                <RefreshIcon
-                    onClick={() => {
-                        setData(handleEmptyData("Loading..."));
-                        getAndSetData();
-                    }}
-                    style={{ margin: "0 auto" }}
-                />
+                <div style={{ margin: "0 auto" }}>
+                    <CloseIcon
+                        onClick={() => {
+                            removeCard(cardInfo.id);
+                        }}
+                    />
+                    <RefreshIcon
+                        onClick={() => {
+                            setData(handleEmptyData("Loading..."));
+                            getAndSetData();
+                        }}
+                    />
+                </div>
                 <div className="card--title">{data[0]}</div>
                 <div className="card--data">
                     <div>{data[1]}</div>

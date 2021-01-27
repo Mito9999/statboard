@@ -50,13 +50,6 @@ span .dollar {
     -ms-user-select: none;
 }
 
-.card--remove {
-    color: red;
-    cursor: pointer;
-    text-align: right;
-    margin-right: 20px;
-}
-
 @media (max-width: 500px) {
     .card {
         flex-basis: auto;
