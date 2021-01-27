@@ -4,6 +4,20 @@ const stringToObjectProperty = (path, obj) => {
         .reduce((prev, curr) => (prev ? prev[curr] : null), obj);
 };
 
+export const numberToOrdinalSuffix = (number) => {
+    // Only returns the suffix, without the number
+    const ordinalRules = new Intl.PluralRules("en", {
+        type: "ordinal",
+    });
+    const suffixes = {
+        one: "ST",
+        two: "ND",
+        few: "rd",
+        other: "TH",
+    };
+    return suffixes[ordinalRules.select(number)];
+};
+
 export const handleEmptyData = (text = "Error", text2 = text, text3 = text) => {
     return [<>{text}</>, <>{text2}</>, <>{text3}</>];
 };

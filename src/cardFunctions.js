@@ -1,5 +1,11 @@
 import React from "react";
-import { handleEmptyData, createCardFunction } from "./utils";
+import {
+    handleEmptyData,
+    createCardFunction,
+    numberToOrdinalSuffix,
+} from "./utils";
+
+const CORS_URL = "https://cors-anywhere.herokuapp.com"; // without trailing forward-slash
 
 const tenfastfingers = (cardInfo) => {
     const headersArray = [
@@ -19,8 +25,7 @@ const tenfastfingers = (cardInfo) => {
         ["accept-language", "en-US,en;q=0.9"],
     ];
 
-    const API_URL =
-        "https://cors-anywhere.herokuapp.com/https://10fastfingers.com/users/get_graph_data/0/";
+    const API_URL = `${CORS_URL}/https://10fastfingers.com/users/get_graph_data/0/`;
 
     const getData = async () => {
         let myHeaders = new Headers();
@@ -133,16 +138,37 @@ const ethereum = (cardInfo) => {
 };
 
 const mee6 = (cardInfo) => {
-    // placeholder for now
-    return [
-        <>{cardInfo.site}</>,
-        <>
-            <span>{cardInfo.data[0]}</span>XP
-        </>,
-        <>
-            <span> {cardInfo.data[1]}</span>RANK
-        </>,
-    ];
+    // cardInfo.data[0] is Server ID, and data[1] is User ID
+    return (async () => {
+        try {
+            const [serverID, userID] = cardInfo.data;
+
+            const data = await fetch(
+                `${CORS_URL}/https://mee6.xyz/api/plugins/levels/leaderboard/${serverID}`
+            );
+            const res = await data.json();
+
+            const user = res.players.find(
+                (playerObj) => playerObj.id === userID
+            );
+            const ranking = res.players.indexOf(user) + 1;
+            const rankingText = numberToOrdinalSuffix(ranking);
+
+            return [
+                <>{cardInfo.site}</>,
+                <>
+                    <span>{user.level}</span>
+                    LEVEL
+                </>,
+                <>
+                    <span>{ranking + rankingText}</span>
+                    PLACE
+                </>,
+            ];
+        } catch {
+            return handleEmptyData();
+        }
+    })();
 };
 
 export const SITE_INFO = {

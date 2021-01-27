@@ -74,9 +74,8 @@ function App() {
         setCards(filteredCards);
     };
 
-    const handleSiteInputChange = (e) => {
-        const { name, value } = e.target;
-        // name is an integer, for indexing
+    const handleSiteInputChange = ({ target: { name, value } }) => {
+        // name is a (string number casted to) integer, for indexing
 
         const newData = [...formData.data];
         newData[parseInt(name)] = value;
@@ -122,7 +121,7 @@ function App() {
                             <input
                                 type="text"
                                 name={index}
-                                value={formData.data[index]}
+                                value={formData.data[index] || ""}
                                 onChange={handleSiteInputChange}
                                 placeholder={dataType}
                             />
