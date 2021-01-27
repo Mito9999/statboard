@@ -138,7 +138,6 @@ const ethereum = (cardInfo) => {
 };
 
 const mee6 = (cardInfo) => {
-    // cardInfo.data[0] is Server ID, and data[1] is User ID
     return (async () => {
         try {
             const [serverID, userID] = cardInfo.data;
@@ -171,6 +170,38 @@ const mee6 = (cardInfo) => {
     })();
 };
 
+const yahoofinance = (cardInfo) => {
+    return (async () => {
+        try {
+            const data = await fetch(
+                `${CORS_URL}/https://query1.finance.yahoo.com/v8/finance/chart/${cardInfo.data[0]}`
+            );
+            const res = await data.json();
+
+            const {
+                regularMarketPrice: stockPrice,
+                chartPreviousClose: closePrice,
+            } = res.chart.result[0].meta;
+
+            const percentChange =
+                ((stockPrice - closePrice) / closePrice) * 100;
+
+            return [
+                <>{cardInfo.data[0]}</>,
+                <>
+                    <span>{stockPrice.toFixed(2)}</span>
+                    USD
+                </>,
+                <>
+                    <span>{percentChange.toFixed(2)}</span>%
+                </>,
+            ];
+        } catch {
+            return handleEmptyData();
+        }
+    })();
+};
+
 export const SITE_INFO = {
     "10fastfingers": {
         fn: tenfastfingers,
@@ -191,5 +222,9 @@ export const SITE_INFO = {
     mee6: {
         fn: mee6,
         dataTypes: ["Server ID", "User ID"],
+    },
+    yahoofinance: {
+        fn: yahoofinance,
+        dataTypes: ["Stock Ticker Symbol"],
     },
 };
