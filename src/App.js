@@ -113,8 +113,7 @@ function App() {
                         (dataType, index) => (
                             <input
                                 type="text"
-                                defaultValue=""
-                                value={formData.data[index]}
+                                value={formData.data[index] || ""}
                                 onChange={(e) => {
                                     handleSiteInputChange(e, index);
                                 }}

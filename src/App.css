@@ -5,8 +5,8 @@
 
 .card {
     flex: 1 0 200px;
-    min-width: 200px;
-    height: 200px;
+    min-width: 250px;
+    height: 250px;
     margin: 1em;
     background-color: rgba(119, 255, 255, 0.5);
     display: flex;
@@ -17,7 +17,7 @@
 }
 
 .hovered {
-    background-color: rgba(255, 82, 82, 0.5);
+    background-color: rgba(77, 197, 197, 0.5);
     cursor: pointer;
 }
 
