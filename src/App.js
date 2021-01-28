@@ -45,9 +45,7 @@ function App() {
         }
     };
 
-    const handleSiteInputChange = (e, index) => {
-        const { value } = e.target;
-
+    const handleSiteInputChange = ({ target: { value } }, index) => {
         const newData = [...formData.data];
         newData[index] = value;
 
