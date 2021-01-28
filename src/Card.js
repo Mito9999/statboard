@@ -31,7 +31,12 @@ const Card = ({ cardInfo, removeCard }) => {
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
             >
-                <div style={{ margin: "0 auto" }}>
+                <div className="card--title">{data[0]}</div>
+                <div className="card--data">
+                    <div>{data[1]}</div>
+                    <div>{data[2]}</div>
+                </div>
+                <div className="card--icons">
                     <CloseIcon
                         onClick={() => {
                             removeCard(cardInfo.id);
@@ -43,11 +48,6 @@ const Card = ({ cardInfo, removeCard }) => {
                             getAndSetData();
                         }}
                     />
-                </div>
-                <div className="card--title">{data[0]}</div>
-                <div className="card--data">
-                    <div>{data[1]}</div>
-                    <div>{data[2]}</div>
                 </div>
             </div>
         </>
