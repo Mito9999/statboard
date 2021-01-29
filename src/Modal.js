@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import CloseIcon from "@material-ui/icons/Close";
 
 const MODAL_STYLES = {
     position: "fixed",
@@ -20,24 +21,28 @@ const OVERLAY_STYLES = {
     bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.75)",
     zIndex: 1000,
+    backdropFilter: "blur(3px)",
 };
 
 const X_STYLES = {
     color: "red",
     cursor: "pointer",
     display: "flex",
+    fontSize: "2rem",
 };
 
 export default function AddModal({ children, open, close }) {
+    // if (open) {
+    //     document.getElementById("root").style.filter = "blur(5px)";
+    // }
+
     return ReactDOM.createPortal(
         <>
             {open && (
                 <>
                     <div style={OVERLAY_STYLES} />
                     <div className="modal" style={MODAL_STYLES}>
-                        <span style={X_STYLES} onClick={close}>
-                            (X)
-                        </span>
+                        <CloseIcon style={X_STYLES} onClick={close} />
                         <div>{children}</div>
                     </div>
                 </>

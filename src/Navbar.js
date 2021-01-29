@@ -14,7 +14,9 @@ export default function Navbar() {
 
     return (
         <div style={NAV_STYLES}>
-            <span style={{ fontSize: "1.5em" }}>Statboard</span>
+            <span style={{ fontSize: "1.5em", fontWeight: "600" }}>
+                Statboard
+            </span>
             <SettingsIcon
                 style={{ fontSize: "2em", cursor: "pointer" }}
                 onClick={() => setIsModalOpen(true)}
