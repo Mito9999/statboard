@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import Card from "./Card";
-import AddModal from "./AddModal";
+import Modal from "./Modal";
 import "./App.css";
 
 import { SITE_INFO } from "./cardFunctions";
@@ -95,7 +95,7 @@ function App() {
                     <div className={"card--add"}>+</div>
                 </div>
             </div>
-            <AddModal open={isModalOpen} close={() => setIsModalOpen(false)}>
+            <Modal open={isModalOpen} close={() => setIsModalOpen(false)}>
                 <h1>Add</h1>
                 <select
                     name="site"
@@ -121,7 +121,7 @@ function App() {
                     )}
                     <button onClick={makeNewCard}>Add</button>
                 </form>
-            </AddModal>
+            </Modal>
         </div>
     );
 }
