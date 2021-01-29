@@ -103,13 +103,16 @@ function App() {
                     onChange={handleChange}
                 >
                     {Object.entries(SITE_INFO).map((siteValue) => (
-                        <option value={siteValue[0]}>{siteValue[0]}</option>
+                        <option key={siteValue[0]} value={siteValue[0]}>
+                            {siteValue[0]}
+                        </option>
                     ))}
                 </select>
                 <form>
                     {SITE_INFO[formData.site].dataTypes.map(
                         (dataType, index) => (
                             <input
+                                key={formData.site + dataType}
                                 type="text"
                                 value={formData.data[index] || ""}
                                 onChange={(e) => {

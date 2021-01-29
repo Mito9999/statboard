@@ -32,10 +32,6 @@ const X_STYLES = {
 };
 
 export default function AddModal({ children, open, close }) {
-    // if (open) {
-    //     document.getElementById("root").style.filter = "blur(5px)";
-    // }
-
     return ReactDOM.createPortal(
         <>
             {open && (
