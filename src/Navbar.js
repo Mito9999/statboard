@@ -27,7 +27,6 @@ export default function Navbar({
     data: { settingsData, handleSettingsUpdate },
 }) {
     useEffect(() => {
-        console.log(settingsData);
         saveToStorage("settings", settingsData);
     }, [settingsData]);
 

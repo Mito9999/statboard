@@ -28,7 +28,7 @@ const getCardsFromStorage = () => {
 
 export default function Cards() {
     const theme = useContext(ThemeContext);
-    console.log("THEME: ", theme);
+
     const [cards, setCards] = useState(getCardsFromStorage());
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,7 +65,6 @@ export default function Cards() {
     };
 
     useEffect(() => {
-        console.log(cards);
         saveToStorage("cards", cards);
     }, [cards]);
 

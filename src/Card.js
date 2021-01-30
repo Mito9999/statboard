@@ -4,8 +4,7 @@ import { SITE_INFO } from "./cardFunctions";
 import { handleEmptyData, getFromStorage } from "./utils";
 import ThemeContext from "./context";
 
-import RefreshIcon from "@material-ui/icons/Refresh";
-import CloseIcon from "@material-ui/icons/Close";
+import { MdRefresh, MdClose } from "react-icons/md";
 
 const Card = ({ cardInfo, removeCard, ...restProps }) => {
     const theme = useContext(ThemeContext);
@@ -48,13 +47,19 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                 <div>{data[1]}</div>
                 <div>{data[2]}</div>
             </div>
-            <div className="card--icons" style={{ color: theme.icons }}>
-                <CloseIcon
+            <div
+                className="card--icons"
+                style={{
+                    color: theme.icons,
+                    fontSize: "1.75rem",
+                }}
+            >
+                <MdClose
                     onClick={() => {
                         removeCard(cardInfo.id);
                     }}
                 />
-                <RefreshIcon
+                <MdRefresh
                     onClick={() => {
                         setData(handleEmptyData("Loading..."));
                         getAndSetData();
