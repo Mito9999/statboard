@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Modal from "./Modal";
 
-import Toggle from "react-toggle";
+import Toggle from "react-switch";
 
 const NAV_STYLES = {
     margin: "3em 1em 2em 1em",
@@ -21,10 +21,10 @@ export default function Navbar() {
         ...JSON.parse(localStorage.getItem("settings")),
     }); // gets the default settings, overrides some of them with the user-selected settings
 
-    const handleSettingsUpdate = ({ target: { name, value } }) => {
+    const handleSettingsUpdate = (checked, _, id) => {
         setSettingsData((prev) => ({
             ...prev,
-            [name]: value === "true",
+            [id]: checked,
         }));
     };
 
@@ -47,14 +47,22 @@ export default function Navbar() {
             <Modal open={isModalOpen} close={() => setIsModalOpen(false)}>
                 <h1>Settings</h1>
                 <h2>General</h2>
-                <span title="Every 1 minute">Auto Update</span>
-                <Toggle
-                    icons={false}
-                    name="autoUpdate"
-                    value={(!settingsData.autoUpdate).toString()}
-                    checked={settingsData.autoUpdate}
-                    onChange={handleSettingsUpdate}
-                />
+                <div
+                    style={{
+                        display: "flex",
+                        width: "200px",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <span title="Every 1 minute">Auto Update</span>
+                    <Toggle
+                        id="autoUpdate"
+                        value={(!settingsData.autoUpdate).toString()}
+                        checked={settingsData.autoUpdate}
+                        onChange={handleSettingsUpdate}
+                    />
+                </div>
             </Modal>
         </div>
     );
