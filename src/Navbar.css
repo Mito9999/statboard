@@ -1,0 +1,8 @@
+.nav--icons {
+    font-size: 2em;
+}
+
+.nav--icons > * {
+    cursor: pointer;
+    margin-left: 20px;
+}

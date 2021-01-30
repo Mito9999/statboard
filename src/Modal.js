@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
-import CloseIcon from "@material-ui/icons/Close";
+import { MdClose } from "react-icons/md";
 
 import ThemeContext from "./context";
 
@@ -43,7 +43,7 @@ export default function AddModal(props) {
                 <>
                     <div style={OVERLAY_STYLES} />
                     <div {...restProps} className="modal" style={MODAL_STYLES}>
-                        <CloseIcon style={X_STYLES} onClick={close} />
+                        <MdClose style={X_STYLES} onClick={close} />
                         <div>{children}</div>
                     </div>
                 </>

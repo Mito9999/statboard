@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import SettingsIcon from "@material-ui/icons/Settings";
 import Modal from "./Modal";
 import SettingCard from "./SettingCard";
 
 import { saveToStorage } from "./utils";
+
+import "./Navbar.css";
+import { MdAdd, MdSettings } from "react-icons/md";
 
 const NAV_STYLES = {
     margin: "3em 1em 2em 1em",
@@ -37,10 +39,10 @@ export default function Navbar({
             <span style={{ fontSize: "1.5em", fontWeight: "600" }}>
                 Statboard
             </span>
-            <SettingsIcon
-                style={{ fontSize: "2em", cursor: "pointer" }}
-                onClick={() => setIsModalOpen(true)}
-            />
+            <div className="nav--icons">
+                <MdAdd />
+                <MdSettings onClick={() => setIsModalOpen(true)} />
+            </div>
             <Modal open={isModalOpen} close={() => setIsModalOpen(false)}>
                 <h1>Settings</h1>
                 <h3 style={{ margin: "30px 0px 15px 0px" }}>General</h3>
