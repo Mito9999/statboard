@@ -8,6 +8,10 @@ export const getFromStorage = (key) => {
     return JSON.parse(localStorage.getItem(key));
 };
 
+export const saveToStorage = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+};
+
 export const numberToOrdinalSuffix = (number) => {
     // Only returns the suffix, without the number
     const ordinalRules = new Intl.PluralRules("en", {

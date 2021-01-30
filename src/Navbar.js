@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Modal from "./Modal";
-
 import SettingCard from "./SettingCard";
+
+import { saveToStorage } from "./utils";
 
 const NAV_STYLES = {
     margin: "3em 1em 2em 1em",
@@ -11,34 +12,23 @@ const NAV_STYLES = {
     alignItems: "center",
 };
 
-const initialSettings = {
-    autoUpdate: false,
-    testingValue: false,
-};
-
 const settingsArray = [
     {
         text: "Auto Update",
         value: "autoUpdate",
     },
+    {
+        text: "Light Mode",
+        value: "lightMode",
+    },
 ];
 
-export default function Navbar() {
-    const [settingsData, setSettingsData] = useState({
-        ...initialSettings,
-        ...JSON.parse(localStorage.getItem("settings")),
-    }); // gets the default settings, overrides some of them with the user-selected settings
-
-    const handleSettingsUpdate = (checked, _, id) => {
-        setSettingsData((prev) => ({
-            ...prev,
-            [id]: checked,
-        }));
-    };
-
+export default function Navbar({
+    data: { settingsData, handleSettingsUpdate },
+}) {
     useEffect(() => {
         console.log(settingsData);
-        localStorage.setItem("settings", JSON.stringify(settingsData));
+        saveToStorage("settings", settingsData);
     }, [settingsData]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
