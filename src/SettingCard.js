@@ -18,12 +18,14 @@ export default function SettingCard({
             }}
         >
             <span>{text}</span>
-            <Toggle
-                id={value}
-                value={(!settingsData[value]).toString()}
-                checked={settingsData[value]}
-                onChange={handleSettingsUpdate}
-            />
+            <div style={{ marginLeft: "10px" }}>
+                <Toggle
+                    id={value}
+                    value={(!settingsData[value]).toString()}
+                    checked={settingsData[value]}
+                    onChange={handleSettingsUpdate}
+                />
+            </div>
         </div>
     );
 }

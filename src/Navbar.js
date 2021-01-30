@@ -16,6 +16,17 @@ const initialSettings = {
     testingValue: false,
 };
 
+const settingsArray = [
+    {
+        text: "Auto Update",
+        value: "autoUpdate",
+    },
+    {
+        text: "Testing Value",
+        value: "testingValue",
+    },
+];
+
 export default function Navbar() {
     const [settingsData, setSettingsData] = useState({
         ...initialSettings,
@@ -47,19 +58,15 @@ export default function Navbar() {
             />
             <Modal open={isModalOpen} close={() => setIsModalOpen(false)}>
                 <h1>Settings</h1>
-                <h2>General</h2>
-                <SettingCard
-                    text="Auto Update"
-                    value="autoUpdate"
-                    settingsData={settingsData}
-                    handleSettingsUpdate={handleSettingsUpdate}
-                />
-                <SettingCard
-                    text="Testing Value"
-                    value="testingValue"
-                    settingsData={settingsData}
-                    handleSettingsUpdate={handleSettingsUpdate}
-                />
+                <h3 style={{ margin: "30px 0px 15px 0px" }}>General</h3>
+                {settingsArray.map(({ text, value }) => (
+                    <SettingCard
+                        text={text}
+                        value={value}
+                        settingsData={settingsData}
+                        handleSettingsUpdate={handleSettingsUpdate}
+                    />
+                ))}
             </Modal>
         </div>
     );
