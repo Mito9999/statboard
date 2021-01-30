@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Modal from "./Modal";
 
-import Toggle from "react-switch";
+import SettingCard from "./SettingCard";
 
 const NAV_STYLES = {
     margin: "3em 1em 2em 1em",
@@ -13,6 +13,7 @@ const NAV_STYLES = {
 
 const initialSettings = {
     autoUpdate: false,
+    testingValue: false,
 };
 
 export default function Navbar() {
@@ -47,22 +48,18 @@ export default function Navbar() {
             <Modal open={isModalOpen} close={() => setIsModalOpen(false)}>
                 <h1>Settings</h1>
                 <h2>General</h2>
-                <div
-                    style={{
-                        display: "flex",
-                        width: "200px",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <span title="Every 1 minute">Auto Update</span>
-                    <Toggle
-                        id="autoUpdate"
-                        value={(!settingsData.autoUpdate).toString()}
-                        checked={settingsData.autoUpdate}
-                        onChange={handleSettingsUpdate}
-                    />
-                </div>
+                <SettingCard
+                    text="Auto Update"
+                    value="autoUpdate"
+                    settingsData={settingsData}
+                    handleSettingsUpdate={handleSettingsUpdate}
+                />
+                <SettingCard
+                    text="Testing Value"
+                    value="testingValue"
+                    settingsData={settingsData}
+                    handleSettingsUpdate={handleSettingsUpdate}
+                />
             </Modal>
         </div>
     );
