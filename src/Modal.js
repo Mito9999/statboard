@@ -31,13 +31,14 @@ const X_STYLES = {
     fontSize: "2rem",
 };
 
-export default function AddModal({ children, open, close }) {
+export default function AddModal(props) {
+    const { children, open, close, ...restProps } = props;
     return ReactDOM.createPortal(
         <>
             {open && (
                 <>
                     <div style={OVERLAY_STYLES} />
-                    <div className="modal" style={MODAL_STYLES}>
+                    <div {...restProps} className="modal" style={MODAL_STYLES}>
                         <CloseIcon style={X_STYLES} onClick={close} />
                         <div>{children}</div>
                     </div>
