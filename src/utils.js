@@ -4,6 +4,10 @@ const stringToObjectProperty = (path, obj) => {
         .reduce((prev, curr) => (prev ? prev[curr] : null), obj);
 };
 
+export const getFromStorage = (key) => {
+    return JSON.parse(localStorage.getItem(key));
+};
+
 export const numberToOrdinalSuffix = (number) => {
     // Only returns the suffix, without the number
     const ordinalRules = new Intl.PluralRules("en", {

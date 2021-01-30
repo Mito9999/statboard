@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SITE_INFO } from "./cardFunctions";
-import { handleEmptyData } from "./utils";
+import { handleEmptyData, getFromStorage } from "./utils";
 
 import RefreshIcon from "@material-ui/icons/Refresh";
 import CloseIcon from "@material-ui/icons/Close";
@@ -21,6 +21,15 @@ const Card = ({ cardInfo, removeCard }) => {
 
     useEffect(() => {
         getAndSetData();
+        const minuteTimerID = setInterval(() => {
+            if (getFromStorage("settings").autoUpdate === true) {
+                getAndSetData();
+            }
+        }, 60 * 1000);
+
+        return () => {
+            clearInterval(minuteTimerID);
+        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

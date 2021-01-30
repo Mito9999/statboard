@@ -21,10 +21,6 @@ const settingsArray = [
         text: "Auto Update",
         value: "autoUpdate",
     },
-    {
-        text: "Testing Value",
-        value: "testingValue",
-    },
 ];
 
 export default function Navbar() {
@@ -61,6 +57,7 @@ export default function Navbar() {
                 <h3 style={{ margin: "30px 0px 15px 0px" }}>General</h3>
                 {settingsArray.map(({ text, value }) => (
                     <SettingCard
+                        key={value}
                         text={text}
                         value={value}
                         settingsData={settingsData}
