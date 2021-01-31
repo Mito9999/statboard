@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { nanoid } from "nanoid";
 
 import Modal from "./Modal";
@@ -6,9 +6,10 @@ import SettingCard from "./SettingCard";
 
 import { saveToStorage } from "./utils";
 import { SITE_INFO } from "./cardFunctions";
+import ThemeContext from "./context";
 
 import "./Navbar.css";
-import { MdAdd, MdSettings } from "react-icons/md";
+import { MdAdd, MdSettings, MdSearch } from "react-icons/md";
 import Select from "react-select";
 
 const NAV_STYLES = {
@@ -33,6 +34,8 @@ export default function Navbar({
     setCards,
     data: { settingsData, handleSettingsUpdate },
 }) {
+    const theme = useContext(ThemeContext);
+
     useEffect(() => {
         saveToStorage("settings", settingsData);
     }, [settingsData]);
@@ -76,6 +79,24 @@ export default function Navbar({
             <span style={{ fontSize: "1.5em", fontWeight: "600" }}>
                 Statboard
             </span>
+            <div>
+                <form
+                    onChange={(e) => {
+                        e.preventDefault();
+                    }}
+                    style={{ display: "flex", alignItems: "center" }}
+                >
+                    <input
+                        type="text"
+                        className="input"
+                        style={{
+                            marginRight: "15px",
+                            border: `4px solid ${theme.card}`,
+                        }}
+                    />
+                    <MdSearch style={{ fontSize: "2em", cursor: "pointer" }} />
+                </form>
+            </div>
             <div className="nav--icons">
                 <MdAdd onClick={() => setIsAddModalOpen(true)} />
                 <MdSettings onClick={() => setIsSettingsModalOpen(true)} />
@@ -100,6 +121,7 @@ export default function Navbar({
                     {SITE_INFO[formData.site].dataTypes.map(
                         (dataType, index) => (
                             <input
+                                className="input"
                                 key={formData.site + dataType}
                                 type="text"
                                 value={formData.data[index] || ""}
