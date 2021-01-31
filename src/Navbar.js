@@ -9,6 +9,7 @@ import { SITE_INFO } from "./cardFunctions";
 
 import "./Navbar.css";
 import { MdAdd, MdSettings } from "react-icons/md";
+import Select from "react-select";
 
 const NAV_STYLES = {
     margin: "3em 1em 2em 1em",
@@ -66,6 +67,10 @@ export default function Navbar({
         ]);
     };
 
+    React.useEffect(() => {
+        console.log(formData);
+    }, [formData]);
+
     return (
         <div style={NAV_STYLES}>
             <span style={{ fontSize: "1.5em", fontWeight: "600" }}>
@@ -77,23 +82,20 @@ export default function Navbar({
             </div>
             <Modal open={isAddModalOpen} close={() => setIsAddModalOpen(false)}>
                 <h1>Add</h1>
-                <select
-                    name="site"
-                    value={formData.site}
-                    onChange={({ target: { value } }) => {
+                <Select
+                    options={Object.entries(SITE_INFO).map((siteValue) => ({
+                        value: siteValue[0],
+                        label: siteValue[0],
+                    }))}
+                    onChange={({ value }) => {
+                        console.log(value);
                         setFormData((prev) => ({
                             ...prev,
                             site: value,
                             data: [],
                         }));
                     }}
-                >
-                    {Object.entries(SITE_INFO).map((siteValue) => (
-                        <option key={siteValue[0]} value={siteValue[0]}>
-                            {siteValue[0]}
-                        </option>
-                    ))}
-                </select>
+                />
                 <form>
                     {SITE_INFO[formData.site].dataTypes.map(
                         (dataType, index) => (
