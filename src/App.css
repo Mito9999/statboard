@@ -17,7 +17,6 @@
 
 .hovered {
     background-color: rgba(48, 71, 94, 0.5);
-    cursor: pointer;
 }
 
 .card--data {
@@ -33,6 +32,7 @@
 
 .card--icons > * {
     margin: 0 10px;
+    cursor: pointer;
 }
 
 .card--title {

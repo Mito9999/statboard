@@ -30,6 +30,19 @@ const settingsArray = [
     },
 ];
 
+const searchData = [
+    {
+        name: "Amazon",
+        prefix: "a",
+        url: "https://www.amazon.com/s?k={{query}}",
+    },
+    {
+        name: "Google",
+        prefix: "g",
+        url: "https://www.google.com/search?q={{query}}",
+    },
+];
+
 export default function Navbar({
     setCards,
     data: { settingsData, handleSettingsUpdate },
@@ -70,10 +83,6 @@ export default function Navbar({
         ]);
     };
 
-    React.useEffect(() => {
-        console.log(formData);
-    }, [formData]);
-
     return (
         <div style={NAV_STYLES}>
             <span style={{ fontSize: "1.5em", fontWeight: "600" }}>
@@ -81,8 +90,19 @@ export default function Navbar({
             </span>
             <div>
                 <form
-                    onChange={(e) => {
+                    onSubmit={(e) => {
                         e.preventDefault();
+                        if (/^[?|!].+ .+$/.test(formData.search)) {
+                            const [prefix] = formData.search.match(
+                                /^[?|!][^ ]+/
+                            );
+                            const prefixText = prefix.replace(/[?|!]/, "");
+                            console.log(
+                                searchData.find(
+                                    (site) => site.prefix === prefixText
+                                )
+                            );
+                        }
                     }}
                     style={{ display: "flex", alignItems: "center" }}
                 >
@@ -92,6 +112,12 @@ export default function Navbar({
                         style={{
                             marginRight: "15px",
                             border: `4px solid ${theme.card}`,
+                        }}
+                        onChange={({ target: { value } }) => {
+                            setFormData((prev) => ({
+                                ...prev,
+                                search: value,
+                            }));
                         }}
                     />
                     <MdSearch style={{ fontSize: "2em", cursor: "pointer" }} />
@@ -109,7 +135,6 @@ export default function Navbar({
                         label: siteValue[0],
                     }))}
                     onChange={({ value }) => {
-                        console.log(value);
                         setFormData((prev) => ({
                             ...prev,
                             site: value,
