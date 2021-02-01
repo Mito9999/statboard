@@ -202,6 +202,29 @@ const yahoofinance = (cardInfo) => {
     })();
 };
 
+const weather = (cardInfo) => {
+    return (async () => {
+        try {
+            const data = await fetch(
+                `http://localhost:3001/weather?zip=${cardInfo.data[0]}`
+            );
+            const res = await data.json();
+
+            return [
+                <>{res.name}</>,
+                <>
+                    <span>{Math.round(res.main.temp)}</span>F
+                </>,
+                <>
+                    <span>{Math.round(res.wind.speed)}</span>MPH
+                </>,
+            ];
+        } catch {
+            return handleEmptyData();
+        }
+    })();
+};
+
 export const SITE_INFO = {
     "10fastfingers": {
         fn: tenfastfingers,
@@ -226,5 +249,9 @@ export const SITE_INFO = {
     yahoofinance: {
         fn: yahoofinance,
         dataTypes: ["Stock Ticker Symbol"],
+    },
+    weather: {
+        fn: weather,
+        dataTypes: ["ZIP Code"],
     },
 };

@@ -1,7 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const fetch = require("node-fetch");
 require("dotenv").config();
+
+app.use(cors());
 
 app.get("/weather", async (req, res) => {
     const zip = req.query.zip;
@@ -14,6 +17,6 @@ app.get("/weather", async (req, res) => {
     res.json(weatherJSON);
 });
 
-app.listen(3000, () => {
-    console.log("-- Server Listening for Requests --");
+app.listen(3001, () => {
+    console.log("-- Server Listening for Requests on port 3001 --");
 });
