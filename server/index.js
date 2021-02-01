@@ -1,10 +1,12 @@
 const express = require("express");
+const helmet = require("helmet");
 const cors = require("cors");
 const app = express();
 const fetch = require("node-fetch");
 require("dotenv").config();
 
 app.use(cors());
+app.use(helmet());
 
 app.get("/weather", async (req, res) => {
     const zip = req.query.zip;
