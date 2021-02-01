@@ -97,10 +97,21 @@ export default function Navbar({
                                 /^[?|!][^ ]+/
                             );
                             const prefixText = prefix.replace(/[?|!]/, "");
-                            console.log(
-                                searchData.find(
-                                    (site) => site.prefix === prefixText
-                                )
+
+                            const query = formData.search.replace(
+                                /[?|!][^ ]+ /,
+                                ""
+                            );
+                            const siteObject = searchData.find(
+                                (site) => site.prefix === prefixText
+                            );
+
+                            window.open(
+                                siteObject.url.replace(
+                                    /{{query}}/,
+                                    encodeURI(query)
+                                ),
+                                "_blank"
                             );
                         }
                     }}
