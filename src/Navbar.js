@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { saveToStorage, submitSearch } from "./utils";
 import { SITE_INFO } from "./cardFunctions";
 import ThemeContext from "./context";
-import { settingsArray, searchData } from "./contstants";
+import { settingsArray, searchData } from "./constants";
 
 import Modal from "./Modal";
 import SettingCard from "./SettingCard";

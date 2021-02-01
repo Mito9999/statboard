@@ -2,5 +2,13 @@
     "trailingComma": "es5",
     "tabWidth": 4,
     "semi": true,
-    "singleQuote": false
+    "singleQuote": false,
+    "overrides": [
+        {
+            "files": "constants.js",
+            "options": {
+                "printWidth": 200
+            }
+        }
+    ]
 }
