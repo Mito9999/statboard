@@ -26,6 +26,24 @@ export const numberToOrdinalSuffix = (number) => {
     return suffixes[ordinalRules.select(number)];
 };
 
+export const submitSearch = (event, searchString, sitesArray) => {
+    event.preventDefault();
+    if (/^[?|!].+ .+$/.test(searchString)) {
+        const [prefix] = searchString.match(/^[?|!][^ ]+/);
+        const prefixText = prefix.replace(/[?|!]/, "");
+
+        const query = searchString.replace(/[?|!][^ ]+ /, "");
+        const siteObject = sitesArray.find(
+            (site) => site.prefix === prefixText
+        );
+
+        window.open(
+            siteObject.url.replace(/{{query}}/, encodeURI(query)),
+            "_blank"
+        );
+    }
+};
+
 export const handleEmptyData = (text = "Error", text2 = text, text3 = text) => {
     return [<>{text}</>, <>{text2}</>, <>{text3}</>];
 };

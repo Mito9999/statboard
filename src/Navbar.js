@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { nanoid } from "nanoid";
 
-import Modal from "./Modal";
-import SettingCard from "./SettingCard";
-
-import { saveToStorage } from "./utils";
+import { saveToStorage, submitSearch } from "./utils";
 import { SITE_INFO } from "./cardFunctions";
 import ThemeContext from "./context";
+import { settingsArray, searchData } from "./contstants";
 
-import "./Navbar.css";
-import { MdAdd, MdSettings, MdSearch } from "react-icons/md";
+import Modal from "./Modal";
+import SettingCard from "./SettingCard";
 import Select from "react-select";
+import { MdAdd, MdSettings, MdSearch } from "react-icons/md";
+import "./Navbar.css";
 
 const NAV_STYLES = {
     margin: "3em 1em 2em 1em",
@@ -18,30 +18,6 @@ const NAV_STYLES = {
     justifyContent: "space-between",
     alignItems: "center",
 };
-
-const settingsArray = [
-    {
-        text: "Auto Update",
-        value: "autoUpdate",
-    },
-    {
-        text: "Light Mode",
-        value: "lightMode",
-    },
-];
-
-const searchData = [
-    {
-        name: "Amazon",
-        prefix: "a",
-        url: "https://www.amazon.com/s?k={{query}}",
-    },
-    {
-        name: "Google",
-        prefix: "g",
-        url: "https://www.google.com/search?q={{query}}",
-    },
-];
 
 export default function Navbar({
     setCards,
@@ -59,6 +35,7 @@ export default function Navbar({
     const [formData, setFormData] = useState({
         site: "10fastfingers",
         data: [],
+        search: "",
     });
 
     const handleSiteInputChange = ({ target: { value } }, index) => {
@@ -90,31 +67,9 @@ export default function Navbar({
             </span>
             <div>
                 <form
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        if (/^[?|!].+ .+$/.test(formData.search)) {
-                            const [prefix] = formData.search.match(
-                                /^[?|!][^ ]+/
-                            );
-                            const prefixText = prefix.replace(/[?|!]/, "");
-
-                            const query = formData.search.replace(
-                                /[?|!][^ ]+ /,
-                                ""
-                            );
-                            const siteObject = searchData.find(
-                                (site) => site.prefix === prefixText
-                            );
-
-                            window.open(
-                                siteObject.url.replace(
-                                    /{{query}}/,
-                                    encodeURI(query)
-                                ),
-                                "_blank"
-                            );
-                        }
-                    }}
+                    onSubmit={(e) =>
+                        submitSearch(e, formData.search, searchData)
+                    }
                     style={{ display: "flex", alignItems: "center" }}
                 >
                     <input
@@ -138,6 +93,7 @@ export default function Navbar({
                 <MdAdd onClick={() => setIsAddModalOpen(true)} />
                 <MdSettings onClick={() => setIsSettingsModalOpen(true)} />
             </div>
+
             <Modal open={isAddModalOpen} close={() => setIsAddModalOpen(false)}>
                 <h1>Add</h1>
                 <Select
