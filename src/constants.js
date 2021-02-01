@@ -90,4 +90,9 @@ export const searchData = [
         name: "Namecheap",
         url: "https://www.namecheap.com/domains/registration/results/?domain={{query}}",
     },
+    {
+        prefix: "nfly",
+        name: "Netlify",
+        url: "https://app.netlify.com/",
+    },
 ];

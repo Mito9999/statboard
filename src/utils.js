@@ -29,17 +29,26 @@ export const numberToOrdinalSuffix = (number) => {
 export const submitSearch = (event, searchString, sitesArray) => {
     event.preventDefault();
 
-    const [prefix] = searchString.match(/^[?|!][^ ]*/);
-    const prefixText = prefix.replace(/[?|!]/, "");
+    try {
+        const [prefix] = searchString.match(/^[?|!][^ ]*/);
+        const prefixText = prefix.replace(/[?|!]/, "");
 
-    const query = searchString.replace(/[?|!][^ ]* /, "");
-    const siteObject = sitesArray.find((site) => site.prefix === prefixText);
+        const query = searchString.replace(/[?|!][^ ]* /, "");
+        const siteObject = sitesArray.find(
+            (site) => site.prefix === prefixText
+        );
 
-    siteObject &&
+        siteObject &&
+            window.open(
+                siteObject.url.replace(/{{query}}/, encodeURI(query)),
+                "_blank"
+            );
+    } catch {
         window.open(
-            siteObject.url.replace(/{{query}}/, encodeURI(query)),
+            `https://www.google.com/search?q=${searchString}`,
             "_blank"
         );
+    }
 };
 
 export const handleEmptyData = (text = "Error", text2 = text, text3 = text) => {
