@@ -95,4 +95,9 @@ export const searchData = [
         name: "Netlify",
         url: "https://app.netlify.com/",
     },
+    {
+        prefix: "sdc",
+        name: "Spanish Dict (Conjugations)",
+        url: "https://www.spanishdict.com/conjugate/{{query}}",
+    },
 ];
