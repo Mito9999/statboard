@@ -5,7 +5,7 @@ import {
     numberToOrdinalSuffix,
 } from "./utils";
 
-const CORS_URL = "http://localhost:3001/proxy"; // without trailing forward-slash
+const CORS_URL = "http://localhost:3001/api/proxy"; // without trailing forward-slash
 
 const tenfastfingers = (cardInfo) => {
     const headersArray = [
@@ -206,7 +206,7 @@ const weather = (cardInfo) => {
     return (async () => {
         try {
             const data = await fetch(
-                `http://localhost:3001/weather?zip=${cardInfo.data[0]}`
+                `http://localhost:3001/api/weather?zip=${cardInfo.data[0]}`
             );
             const res = await data.json();
 

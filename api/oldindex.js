@@ -6,8 +6,6 @@ const app = express();
 const fetch = require("node-fetch");
 require("dotenv").config();
 
-app.set("trust proxy", 1);
-
 app.use(cors());
 app.use(helmet());
 
