@@ -12,11 +12,12 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
     const [hovered, setHovered] = useState(false);
 
     const getAndSetData = async () => {
+        const prevData = data;
         try {
             const siteInfo = await SITE_INFO[cardInfo.site].fn(cardInfo);
             setData(siteInfo);
         } catch (err) {
-            setData(handleEmptyData());
+            setData(prevData);
             console.log(err);
         }
     };

@@ -5,7 +5,7 @@ import {
     numberToOrdinalSuffix,
 } from "./utils";
 
-const CORS_URL = "https://cors-anywhere.herokuapp.com"; // without trailing forward-slash
+const CORS_URL = "http://localhost:3001/proxy"; // without trailing forward-slash
 
 const tenfastfingers = (cardInfo) => {
     const headersArray = [
@@ -229,29 +229,36 @@ export const SITE_INFO = {
     "10fastfingers": {
         fn: tenfastfingers,
         dataTypes: ["Account ID"],
+        docs: false,
     },
     reddit: {
         fn: reddit,
         dataTypes: ["Username"],
+        docs: true,
     },
     ethermine: {
         fn: ethermine,
         dataTypes: ["Wallet Address"],
+        docs: true,
     },
     ethereum: {
         fn: ethereum,
         dataTypes: ["Wallet Address"],
+        docs: false,
     },
     mee6: {
         fn: mee6,
         dataTypes: ["Server ID", "User ID"],
+        docs: false,
     },
     yahoofinance: {
         fn: yahoofinance,
         dataTypes: ["Stock Ticker Symbol"],
+        docs: false,
     },
     weather: {
         fn: weather,
         dataTypes: ["ZIP Code"],
+        docs: true,
     },
 };
