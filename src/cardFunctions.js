@@ -142,7 +142,7 @@ const mee6 = (cardInfo) => {
             const [serverID, userID] = cardInfo.data;
 
             const data = await fetch(
-                `${CORS_URL}/https://mee6.xyz/api/plugins/levels/leaderboard/${serverID}`
+                `${CORS_URL}/mee6.xyz/api/plugins/levels/leaderboard/${serverID}`
             );
             const res = await data.json();
 
@@ -173,7 +173,7 @@ const yahoofinance = (cardInfo) => {
     return (async () => {
         try {
             const data = await fetch(
-                `${CORS_URL}/https://query1.finance.yahoo.com/v8/finance/chart/${cardInfo.data[0]}`
+                `${CORS_URL}/query1.finance.yahoo.com/v8/finance/chart/${cardInfo.data[0]}`
             );
             const res = await data.json();
 
