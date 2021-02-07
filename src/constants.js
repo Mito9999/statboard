@@ -100,4 +100,19 @@ export const searchData = [
         name: "Spanish Dict (Conjugations)",
         url: "https://www.spanishdict.com/conjugate/{{query}}",
     },
+    {
+        prefix: "npms",
+        name: "Node Package Manager (NPM) Search",
+        url: "https://www.npmjs.com/search?q={{query}}",
+    },
+    {
+        prefix: "npm",
+        name: "Node Package Manager (NPM) Exact Match",
+        url: "https://www.npmjs.com/package/{{query}}",
+    },
+    {
+        prefix: "vercel",
+        name: "Vercel Dashboard",
+        url: "https://vercel.com/dashboard",
+    },
 ];

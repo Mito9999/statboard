@@ -5,7 +5,8 @@ import {
     numberToOrdinalSuffix,
 } from "./utils";
 
-const CORS_URL = "https://statboard.vercel.app/api/proxy"; // without trailing forward-slash
+const MAIN_URL = "https://statboard.vercel.app"; // without trailing forward-slash
+const CORS_URL = `${MAIN_URL}/api/proxy`; // without trailing forward-slash
 
 const tenfastfingers = (cardInfo) => {
     const headersArray = [
@@ -206,7 +207,7 @@ const weather = (cardInfo) => {
     return (async () => {
         try {
             const data = await fetch(
-                `https://statboard.vercel.app/api/weather?zip=${cardInfo.data[0]}`
+                `${MAIN_URL}/api/weather?zip=${cardInfo.data[0]}`
             );
             const res = await data.json();
 
