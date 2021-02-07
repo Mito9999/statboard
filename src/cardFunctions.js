@@ -5,7 +5,10 @@ import {
     numberToOrdinalSuffix,
 } from "./utils";
 
-const MAIN_URL = "https://statboard.vercel.app"; // without trailing forward-slash
+const MAIN_URL =
+    window.location.hostname === "localhost"
+        ? "http://localhost:3001"
+        : "https://statboard.vercel.app"; // without trailing forward-slash
 const CORS_URL = `${MAIN_URL}/api/proxy`; // without trailing forward-slash
 
 const tenfastfingers = (cardInfo) => {
@@ -38,7 +41,7 @@ const tenfastfingers = (cardInfo) => {
             const { avg_norm, languages_sorted } = await fetch(
                 API_URL + cardInfo.data[0],
                 {
-                    method: "POST",
+                    method: "GET",
                     headers: myHeaders,
                     redirect: "follow",
                 }
