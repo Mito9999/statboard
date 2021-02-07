@@ -26,3 +26,30 @@ export const searchData = [
     { name: "Node Package Manager (NPM) Exact Match", prefix: "npm", url: "https://www.npmjs.com/package/{{query}}" },
     { name: "Vercel Dashboard", prefix: "vercel", url: "https://vercel.com/dashboard" },
 ];
+
+export const selectDropdownStyles = (theme) => ({
+    option: (provided, state) => ({
+        ...provided,
+        color: theme.text,
+        backgroundColor: theme.background,
+    }),
+    control: (base, state) => ({
+        ...base,
+        color: theme.text,
+        backgroundColor: theme.background,
+        boxShadow: null,
+    }),
+    menuList: (base) => ({
+        ...base,
+        padding: 0,
+    }),
+    input: (base) => ({
+        ...base,
+        color: theme.text,
+        fontFamily: "inherit",
+    }),
+    singleValue: (base) => ({
+        ...base,
+        color: theme.text,
+    }),
+});

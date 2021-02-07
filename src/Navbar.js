@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { saveToStorage, submitSearch } from "./utils";
 import { SITE_INFO } from "./cardFunctions";
 import ThemeContext from "./context";
-import { settingsArray, searchData } from "./constants";
+import { settingsArray, searchData, selectDropdownStyles } from "./constants";
 
 import Modal from "./Modal";
 import SettingCard from "./SettingCard";
@@ -96,19 +96,22 @@ export default function Navbar({
 
             <Modal open={isAddModalOpen} close={() => setIsAddModalOpen(false)}>
                 <h1>Add</h1>
-                <Select
-                    options={Object.entries(SITE_INFO).map((siteValue) => ({
-                        value: siteValue[0],
-                        label: siteValue[0],
-                    }))}
-                    onChange={({ value }) => {
-                        setFormData((prev) => ({
-                            ...prev,
-                            site: value,
-                            data: [],
-                        }));
-                    }}
-                />
+                <div>
+                    <Select
+                        options={Object.entries(SITE_INFO).map((siteValue) => ({
+                            value: siteValue[0],
+                            label: siteValue[0],
+                        }))}
+                        onChange={({ value }) => {
+                            setFormData((prev) => ({
+                                ...prev,
+                                site: value,
+                                data: [],
+                            }));
+                        }}
+                        styles={selectDropdownStyles(theme)}
+                    />
+                </div>
                 <form>
                     {SITE_INFO[formData.site].dataTypes.map(
                         (dataType, index) => (
