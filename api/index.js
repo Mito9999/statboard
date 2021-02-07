@@ -7,12 +7,6 @@ const fetch = require("node-fetch");
 app.use(cors());
 app.use(helmet());
 
-app.get("/api", (req, res) => {
-    res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.end(`Hello World`);
-});
-
 app.get("/api/weather", async (req, res) => {
     const zip = req.query.zip;
 

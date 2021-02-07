@@ -206,7 +206,7 @@ const weather = (cardInfo) => {
     return (async () => {
         try {
             const data = await fetch(
-                `http://localhost:3001/api/weather?zip=${cardInfo.data[0]}`
+                `https://statboard.vercel.app/api/weather?zip=${cardInfo.data[0]}`
             );
             const res = await data.json();
 
