@@ -1,9 +1,3 @@
 {
-    "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }],
-    "functions": {
-        "api/test.js": {
-            "memory": 500,
-            "maxDuration": 5
-        }
-    }
+    "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
 }

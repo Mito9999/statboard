@@ -5,7 +5,7 @@ import {
     numberToOrdinalSuffix,
 } from "./utils";
 
-const CORS_URL = "http://localhost:3001/api/proxy"; // without trailing forward-slash
+const CORS_URL = "https://statboard.vercel.app/api/proxy"; // without trailing forward-slash
 
 const tenfastfingers = (cardInfo) => {
     const headersArray = [

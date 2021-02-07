@@ -25,7 +25,7 @@ const proxy = corsAnywhere.createServer({
 });
 
 app.get("/api/proxy/:proxyUrl*", (req, res) => {
-    req.url = req.url.replace("/proxy/", "/");
+    req.url = req.url.replace("/api/proxy/", "/");
     proxy.emit("request", req, res);
 });
 
