@@ -24,7 +24,7 @@ const tenfastfingers = (cardInfo) => {
         ["origin", "https://10fastfingers.com"],
     ];
 
-    const API_URL = `${CORS_URL}/https://10fastfingers.com/users/get_graph_data/0/`;
+    const API_URL = `${CORS_URL}/10fastfingers.com/users/get_graph_data/0/`;
 
     const getData = async () => {
         let myHeaders = new Headers();
