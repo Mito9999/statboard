@@ -19,6 +19,8 @@ const NAV_STYLES = {
     alignItems: "center",
 };
 
+const defaultFormData = { site: "10fastfingers", data: [] };
+
 export default function Navbar({
     setCards,
     data: { settingsData, handleSettingsUpdate },
@@ -33,8 +35,7 @@ export default function Navbar({
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     const [formData, setFormData] = useState({
-        site: "10fastfingers",
-        data: [],
+        ...defaultFormData,
         search: "",
     });
 
@@ -94,7 +95,16 @@ export default function Navbar({
                 <MdSettings onClick={() => setIsSettingsModalOpen(true)} />
             </div>
 
-            <Modal open={isAddModalOpen} close={() => setIsAddModalOpen(false)}>
+            <Modal
+                open={isAddModalOpen}
+                close={() => {
+                    setFormData((prev) => ({
+                        ...prev,
+                        ...defaultFormData,
+                    }));
+                    setIsAddModalOpen(false);
+                }}
+            >
                 <h1>Add</h1>
                 <div>
                     <Select
@@ -112,7 +122,14 @@ export default function Navbar({
                         styles={selectDropdownStyles(theme)}
                     />
                 </div>
-                <form>
+                <form
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyItems: "center",
+                        alignItems: "center",
+                    }}
+                >
                     {SITE_INFO[formData.site].dataTypes.map(
                         (dataType, index) => (
                             <input
@@ -123,11 +140,26 @@ export default function Navbar({
                                 onChange={(e) => {
                                     handleSiteInputChange(e, index);
                                 }}
+                                style={{ width: "100%" }}
                                 placeholder={dataType}
                             />
                         )
                     )}
-                    <button onClick={makeNewCard}>Add</button>
+                    <div
+                        onClick={makeNewCard}
+                        className="input"
+                        style={{
+                            fontSize: "2em",
+                            cursor: "pointer",
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            backgroundColor: theme.card,
+                        }}
+                    >
+                        <MdAdd />
+                    </div>
                 </form>
             </Modal>
             <Modal
