@@ -26,6 +26,22 @@ export const numberToOrdinalSuffix = (number) => {
     return suffixes[ordinalRules.select(number)];
 };
 
+export const numberToAbbreviation = (number) => {
+    // Returns the abbreviation with the number
+    let newValue = number;
+    const suffixes = ["", "K", "M", "B", "T"];
+    let suffixNum = 0;
+    while (newValue >= 1000) {
+        newValue /= 1000;
+        suffixNum++;
+    }
+
+    newValue = newValue.toPrecision(3);
+    newValue += suffixes[suffixNum];
+
+    return newValue;
+};
+
 export const submitSearch = (event, searchString, sitesArray) => {
     event.preventDefault();
 

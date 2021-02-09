@@ -3,6 +3,7 @@ import {
     handleEmptyData,
     createCardFunction,
     numberToOrdinalSuffix,
+    numberToAbbreviation,
 } from "./utils";
 
 const MAIN_URL =
@@ -224,6 +225,30 @@ const weather = (cardInfo) => {
     })();
 };
 
+const crypto = (cardInfo) => {
+    return (async () => {
+        try {
+            const data = await fetch(
+                `${MAIN_URL}/api/crypto?symbol=${cardInfo.data[0]}`
+            );
+            const { symbols, price, volume } = await data.json();
+
+            return [
+                <>{symbols}</>,
+                <>
+                    <span className="dollar">$</span>
+                    <span>{price.toFixed(2)}</span>USD
+                </>,
+                <>
+                    <span>{numberToAbbreviation(volume * 1000000)}</span>(24h)
+                </>,
+            ];
+        } catch {
+            return handleEmptyData();
+        }
+    })();
+};
+
 export const SITE_INFO = {
     "10fastfingers": {
         fn: tenfastfingers,
@@ -258,6 +283,11 @@ export const SITE_INFO = {
     weather: {
         fn: weather,
         dataTypes: ["ZIP Code"],
+        docs: true,
+    },
+    cyrpto: {
+        fn: crypto,
+        dataTypes: ["Symbol"],
         docs: true,
     },
 };
