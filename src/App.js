@@ -2,16 +2,12 @@ import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import "./App.css";
 
-import ThemeContext, { themes } from "./context";
+import MainContext, { theme } from "./context";
 import { getFromStorage, saveToStorage } from "./utils";
+import { initialSettings } from "./constants";
 
 import Navbar from "./Navbar";
 import Cards from "./Cards";
-
-const initialSettings = {
-    autoUpdate: false,
-    lightMode: false,
-};
 
 const initialCards = [
     {
@@ -46,22 +42,28 @@ function App() {
         }));
     };
 
-    const themeValue = settingsData.lightMode ? themes.light : themes.dark;
+    const themeValue = settingsData.lightMode ? theme.light : theme.dark;
     document.body.style.color = themeValue.text;
     document.body.style.backgroundColor = themeValue.background;
 
     useEffect(() => {
         saveToStorage("cards", cards);
-    }, [cards]);
+        saveToStorage("settings", settingsData);
+    }, [cards, settingsData]);
 
     return (
-        <ThemeContext.Provider value={themeValue}>
-            <Navbar
-                setCards={setCards}
-                data={{ settingsData, handleSettingsUpdate }}
-            />
+        <MainContext.Provider
+            value={{
+                theme: themeValue,
+                settings: {
+                    data: settingsData,
+                    handleSettingsUpdate,
+                },
+            }}
+        >
+            <Navbar setCards={setCards} />
             <Cards cards={cards} setCards={setCards} />
-        </ThemeContext.Provider>
+        </MainContext.Provider>
     );
 }
 

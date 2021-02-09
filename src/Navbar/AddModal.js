@@ -6,14 +6,14 @@ import { MdAdd } from "react-icons/md";
 
 import { SITE_INFO } from "../cardFunctions";
 import { selectDropdownStyles } from "../constants";
-import ThemeContext from "../context";
+import MainContext from "../context";
 
 const defaultFormData = { site: "10fastfingers", data: [] };
 
 export default function AddModal({
     data: { isAddModalOpen, setIsAddModalOpen, setCards },
 }) {
-    const theme = useContext(ThemeContext);
+    const context = useContext(MainContext);
     const [formData, setFormData] = useState({ ...defaultFormData });
 
     const handleSiteInputChange = ({ target: { value } }, index) => {
@@ -63,7 +63,7 @@ export default function AddModal({
                             data: [],
                         }));
                     }}
-                    styles={selectDropdownStyles(theme)}
+                    styles={selectDropdownStyles(context.theme)}
                 />
             </div>
             <form
@@ -73,7 +73,7 @@ export default function AddModal({
                     justifyItems: "center",
                     alignItems: "center",
                 }}
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={makeNewCard}
             >
                 {SITE_INFO[formData.site].dataTypes.map((dataType, index) => (
                     <input
@@ -98,7 +98,7 @@ export default function AddModal({
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor: theme.card,
+                        backgroundColor: context.theme.card,
                     }}
                 >
                     <MdAdd />

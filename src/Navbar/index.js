@@ -14,10 +14,7 @@ const NAV_STYLES = {
     alignItems: "center",
 };
 
-export default function Navbar({
-    setCards,
-    data: { settingsData, handleSettingsUpdate },
-}) {
+export default function Navbar({ setCards }) {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
@@ -32,8 +29,6 @@ export default function Navbar({
                 data={{
                     isSettingsModalOpen,
                     setIsSettingsModalOpen,
-                    settingsData,
-                    handleSettingsUpdate,
                 }}
             />
         </div>

@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 import { submitSearch } from "../utils";
 import { MdSearch } from "react-icons/md";
 import { searchData } from "../constants";
-import ThemeContext from "../context";
+import MainContext from "../context.js";
 
 export default function SearchBar() {
-    const theme = useContext(ThemeContext);
+    const { theme } = useContext(MainContext);
 
     const [search, setSearch] = useState("");
     return (

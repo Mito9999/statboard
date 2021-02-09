@@ -3,6 +3,11 @@ export const settingsArray = [
     { text: "Light Mode", value: "lightMode" },
 ];
 
+export const initialSettings = {
+    autoUpdate: false,
+    lightMode: false,
+};
+
 export const searchData = [
     { name: "Amazon", prefix: "a", url: "https://www.amazon.com/s?k={{query}}" },
     { name: "Google", prefix: "g", url: "https://www.google.com/search?q={{query}}" },

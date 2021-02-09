@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import { MdClose } from "react-icons/md";
 
-import ThemeContext from "./context";
+import MainContext from "./context";
 
 const OVERLAY_STYLES = {
     position: "fixed",
@@ -24,15 +24,15 @@ const X_STYLES = {
 
 export default function AddModal(props) {
     const { children, open, close, ...restProps } = props;
-    const theme = useContext(ThemeContext);
+    const context = useContext(MainContext);
 
     const MODAL_STYLES = {
         position: "fixed",
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        backgroundColor: theme.background,
-        color: theme.text,
+        backgroundColor: context.theme.background,
+        color: context.theme.text,
         padding: "50px",
         zIndex: 1000,
     };

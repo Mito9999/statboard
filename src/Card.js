@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { SITE_INFO } from "./cardFunctions";
 import { handleEmptyData, getFromStorage } from "./utils";
-import ThemeContext from "./context";
+import MainContext from "./context";
 
 import { MdRefresh, MdClose } from "react-icons/md";
 
 const Card = ({ cardInfo, removeCard, ...restProps }) => {
-    const theme = useContext(ThemeContext);
+    const context = useContext(MainContext);
     const [data, setData] = useState(handleEmptyData("Loading..."));
     const [hovered, setHovered] = useState(false);
 
@@ -51,7 +51,7 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
             <div
                 className="card--icons"
                 style={{
-                    color: theme.icons,
+                    color: context.theme.icons,
                     fontSize: "1.75rem",
                 }}
             >

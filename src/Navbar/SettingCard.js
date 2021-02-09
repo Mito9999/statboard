@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Toggle from "react-switch";
+import MainContext from "../context";
 
-export default function SettingCard({
-    text,
-    value,
-    settingsData,
-    handleSettingsUpdate,
-}) {
+export default function SettingCard({ text, value }) {
+    const { settings } = useContext(MainContext);
     return (
         <div
             style={{
@@ -21,9 +18,9 @@ export default function SettingCard({
             <div style={{ marginLeft: "10px" }}>
                 <Toggle
                     id={value}
-                    value={(!settingsData[value]).toString()}
-                    checked={settingsData[value]}
-                    onChange={handleSettingsUpdate}
+                    value={(!settings.data[value]).toString()}
+                    checked={settings.data[value]}
+                    onChange={settings.handleSettingsUpdate}
                 />
             </div>
         </div>
