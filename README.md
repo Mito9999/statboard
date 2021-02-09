@@ -1,3 +1,6 @@
-# Dashboard
+# Statboard
 
-Simple dashboard for viewing important data built using React.js!
+Simple dashboard for viewing data built with React.js!\
+Live Demo: https://statboard.vercel.app/
+
+![](demo.png)
