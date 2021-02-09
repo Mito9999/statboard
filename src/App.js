@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-import MainContext, { theme } from "./context";
+import MainContext from "./context";
 import { getFromStorage, saveToStorage } from "./utils";
-import { initialSettings, initialCards } from "./constants";
+import { theme, initialSettings, initialCards } from "./constants";
 
 import Navbar from "./Navbar";
 import Cards from "./Cards";

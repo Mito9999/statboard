@@ -5,6 +5,21 @@ export const settingsArray = [
     { text: "Light Mode", value: "lightMode" },
 ];
 
+export const theme = {
+    light: {
+        background: "#f6f5f5",
+        card: "#d3e0ea",
+        icons: "#ff884b",
+        text: "#276678",
+    },
+    dark: {
+        background: "#222831",
+        card: "#30475e",
+        icons: "#f2a365",
+        text: "#ececec",
+    },
+};
+
 export const initialSettings = {
     autoUpdate: false,
     lightMode: false,
