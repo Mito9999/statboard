@@ -285,7 +285,7 @@ export const SITE_INFO = {
         dataTypes: ["ZIP Code"],
         docs: true,
     },
-    cyrpto: {
+    crypto: {
         fn: crypto,
         dataTypes: ["Symbol"],
         docs: true,

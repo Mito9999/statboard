@@ -27,8 +27,18 @@ export const initialSettings = {
 
 export const initialCards = [
     {
-        site: "ethereum",
-        data: ["0x5fa22d211d9f8d4cb094807ff8c468e664f18c97"],
+        site: "crypto",
+        data: ["BTC"],
+        id: nanoid(),
+    },
+    {
+        site: "weather",
+        data: ["10001"],
+        id: nanoid(),
+    },
+    {
+        site: "yahoofinance",
+        data: ["AMD"],
         id: nanoid(),
     },
 ];
