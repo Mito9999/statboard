@@ -3,20 +3,20 @@ import MainContext from "./context";
 
 import Card from "./Card";
 
-export default function Cards({ cards, setCards }) {
-    const context = useContext(MainContext);
+export default function Cards() {
+    const { theme, cards } = useContext(MainContext);
 
     const removeCard = (cardID) => {
-        const filteredCards = cards.filter((card) => card.id !== cardID);
-        setCards(filteredCards);
+        const filteredCards = cards.data.filter((card) => card.id !== cardID);
+        cards.setCards(filteredCards);
     };
 
     return (
-        <div className="all-cards" style={{ color: context.theme.text }}>
-            {cards.map((cardInfo) => (
+        <div className="all-cards" style={{ color: theme.text }}>
+            {cards.data.map((cardInfo) => (
                 <Card
                     key={cardInfo.id}
-                    style={{ backgroundColor: context.theme.card }}
+                    style={{ backgroundColor: theme.card }}
                     cardInfo={cardInfo}
                     removeCard={removeCard}
                 />

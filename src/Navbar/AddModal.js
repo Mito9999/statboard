@@ -11,9 +11,9 @@ import MainContext from "../context";
 const defaultFormData = { site: "10fastfingers", data: [] };
 
 export default function AddModal({
-    data: { isAddModalOpen, setIsAddModalOpen, setCards },
+    data: { isAddModalOpen, setIsAddModalOpen },
 }) {
-    const context = useContext(MainContext);
+    const { theme, cards } = useContext(MainContext);
     const [formData, setFormData] = useState({ ...defaultFormData });
 
     const handleSiteInputChange = ({ target: { value } }, index) => {
@@ -28,7 +28,7 @@ export default function AddModal({
 
     const makeNewCard = (e) => {
         e.preventDefault();
-        setCards((prev) => [
+        cards.setCards((prev) => [
             ...prev,
             {
                 site: formData.site,
@@ -63,7 +63,7 @@ export default function AddModal({
                             data: [],
                         }));
                     }}
-                    styles={selectDropdownStyles(context.theme)}
+                    styles={selectDropdownStyles(theme)}
                 />
             </div>
             <form
@@ -98,7 +98,7 @@ export default function AddModal({
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor: context.theme.card,
+                        backgroundColor: theme.card,
                     }}
                 >
                     <MdAdd />

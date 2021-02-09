@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export const settingsArray = [
     { text: "Auto Update", value: "autoUpdate" },
     { text: "Light Mode", value: "lightMode" },
@@ -7,6 +9,14 @@ export const initialSettings = {
     autoUpdate: false,
     lightMode: false,
 };
+
+export const initialCards = [
+    {
+        site: "ethereum",
+        data: ["0x5fa22d211d9f8d4cb094807ff8c468e664f18c97"],
+        id: nanoid(),
+    },
+];
 
 export const searchData = [
     { name: "Amazon", prefix: "a", url: "https://www.amazon.com/s?k={{query}}" },

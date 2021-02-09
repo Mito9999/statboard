@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
 import "./App.css";
 
 import MainContext, { theme } from "./context";
 import { getFromStorage, saveToStorage } from "./utils";
-import { initialSettings } from "./constants";
+import { initialSettings, initialCards } from "./constants";
 
 import Navbar from "./Navbar";
 import Cards from "./Cards";
-
-const initialCards = [
-    {
-        site: "ethereum",
-        data: ["0x5fa22d211d9f8d4cb094807ff8c468e664f18c97"],
-        id: nanoid(),
-    },
-];
 
 const getCardsFromStorage = () => {
     try {
@@ -59,10 +50,14 @@ function App() {
                     data: settingsData,
                     handleSettingsUpdate,
                 },
+                cards: {
+                    data: cards,
+                    setCards,
+                },
             }}
         >
-            <Navbar setCards={setCards} />
-            <Cards cards={cards} setCards={setCards} />
+            <Navbar />
+            <Cards />
         </MainContext.Provider>
     );
 }

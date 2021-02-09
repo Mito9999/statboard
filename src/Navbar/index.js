@@ -14,7 +14,7 @@ const NAV_STYLES = {
     alignItems: "center",
 };
 
-export default function Navbar({ setCards }) {
+export default function Navbar() {
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
@@ -24,7 +24,7 @@ export default function Navbar({ setCards }) {
             <SearchBar />
             <Icons data={{ setIsAddModalOpen, setIsSettingsModalOpen }} />
 
-            <AddModal data={{ isAddModalOpen, setIsAddModalOpen, setCards }} />
+            <AddModal data={{ isAddModalOpen, setIsAddModalOpen }} />
             <SettingsModal
                 data={{
                     isSettingsModalOpen,

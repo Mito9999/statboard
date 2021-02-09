@@ -1,5 +1,8 @@
 import React from "react";
-import { initialSettings as settings } from "./constants";
+import {
+    initialSettings as settings,
+    initialCards as cards,
+} from "./constants";
 
 export const theme = {
     light: {
@@ -15,6 +18,6 @@ export const theme = {
         text: "#ececec",
     },
 };
-const MainContext = React.createContext({ theme, settings });
+const MainContext = React.createContext({ theme, settings, cards });
 
 export default MainContext;
