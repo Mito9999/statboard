@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { SITE_INFO } from "./cardFunctions";
-import { handleEmptyData, getFromStorage } from "./utils";
-import MainContext from "./context";
+import { SITE_INFO } from "../cardFunctions";
+import { handleEmptyData, getFromStorage } from "../utils";
+import MainContext from "../context";
 
 import { MdRefresh, MdClose } from "react-icons/md";
 
