@@ -40,13 +40,13 @@ app.get("/api/crypto", async (req, res) => {
             PRICE: price,
             FROMSYMBOL: symbol1,
             TOSYMBOL: symbol2,
-            VOLUMEDAY: volume,
+            MKTCAP: cap,
         } = allJSONData[symbol]["USD"];
 
         res.json({
             symbols: `${symbol1} - ${symbol2}`,
             price,
-            volume,
+            cap,
         });
     } catch {
         res.status(404);

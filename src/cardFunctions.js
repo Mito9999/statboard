@@ -231,7 +231,7 @@ const crypto = (cardInfo) => {
             const data = await fetch(
                 `${MAIN_URL}/api/crypto?symbol=${cardInfo.data[0]}`
             );
-            const { symbols, price, volume } = await data.json();
+            const { symbols, price, cap } = await data.json();
 
             return [
                 <>{symbols}</>,
@@ -240,7 +240,7 @@ const crypto = (cardInfo) => {
                     <span>{price.toFixed(2)}</span>USD
                 </>,
                 <>
-                    <span>{numberToAbbreviation(volume * 1000000)}</span>(24h)
+                    <span>{numberToAbbreviation(cap)}</span>(24h)
                 </>,
             ];
         } catch {
