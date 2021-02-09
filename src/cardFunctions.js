@@ -207,15 +207,15 @@ const weather = (cardInfo) => {
             const data = await fetch(
                 `${MAIN_URL}/api/weather?zip=${cardInfo.data[0]}`
             );
-            const res = await data.json();
+            const { city, temp, wind_speed } = await data.json();
 
             return [
-                <>{res.name}</>,
+                <>{city}</>,
                 <>
-                    <span>{Math.round(res.main.temp)}</span>F
+                    <span>{Math.round(temp)}</span>F
                 </>,
                 <>
-                    <span>{Math.round(res.wind.speed)}</span>MPH
+                    <span>{Math.round(wind_speed)}</span>MPH
                 </>,
             ];
         } catch {
