@@ -15,3 +15,18 @@
     outline: none;
     padding: 8px;
 }
+
+.top-search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.top-search-bar input {
+    margin-top: 0px;
+}
+
+@media (max-width: 750px) {
+    .top-search-bar {
+        display: none;
+    }
+}
