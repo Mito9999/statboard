@@ -9,13 +9,20 @@ app.use(cors());
 app.use(helmet());
 
 app.get("/api/weather", async (req, res) => {
-    const zip = req.query.zip;
-    const weatherResponse = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&units=imperial&appid=${process.env.WEATHER_API_KEY}`
-    );
-    const weatherJSON = await weatherResponse.json();
+    try {
+        const zip = req.query.zip;
+        const weatherResponse = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&units=imperial&appid=${process.env.WEATHER_API_KEY}`
+        );
+        const weatherJSON = await weatherResponse.json();
 
-    res.json(weatherJSON);
+        res.json(weatherJSON);
+    } catch {
+        res.status(404);
+        res.json({
+            message: "Failed to get weather data.",
+        });
+    }
 });
 
 app.get("/api/crypto", async (req, res) => {
@@ -52,8 +59,15 @@ const proxy = corsAnywhere.createServer({
 });
 
 app.get("/api/proxy/:proxyUrl*", (req, res) => {
-    req.url = req.url.replace("/api/proxy/", "/");
-    proxy.emit("request", req, res);
+    try {
+        req.url = req.url.replace("/api/proxy/", "/");
+        proxy.emit("request", req, res);
+    } catch {
+        res.status(404);
+        res.json({
+            message: "Failed to redirect through proxy.",
+        });
+    }
 });
 
 app.listen(3001, () => {
