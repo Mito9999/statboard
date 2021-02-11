@@ -1,5 +1,8 @@
 .nav--icons {
     font-size: 2em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .nav--icons > * {
