@@ -27,8 +27,8 @@ export const initialSettings = {
 
 export const initialCards = [
     {
-        site: "crypto",
-        data: ["BTC"],
+        site: "yahoofinance",
+        data: ["AMD"],
         id: nanoid(),
     },
     {
@@ -37,8 +37,8 @@ export const initialCards = [
         id: nanoid(),
     },
     {
-        site: "yahoofinance",
-        data: ["AMD"],
+        site: "crypto",
+        data: ["BTC"],
         id: nanoid(),
     },
 ];

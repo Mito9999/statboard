@@ -31,7 +31,7 @@ app.get("/api/weather", async (req, res) => {
 
 app.get("/api/crypto", async (req, res) => {
     try {
-        const symbol = req.query.symbol;
+        const symbol = req.query.symbol.toUpperCase();
         const cryptoResponse = await fetch(
             `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${symbol}&tsyms=USD&api_key=${process.env.CRYPTOCOMPARE_API_KEY}`
         );
