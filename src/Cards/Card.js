@@ -25,7 +25,34 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
     useEffect(() => {
         getAndSetData();
         const minuteTimerID = setInterval(() => {
-            if (getFromStorage("settings").autoUpdate === true) {
+            let shouldRefresh = true;
+
+            if (SITE_INFO[cardInfo.site].refreshPeriod) {
+                const {
+                    refreshPeriod: { start, end },
+                } = SITE_INFO[cardInfo.site];
+                const now = new Date("Fri Feb 12 2021 14:36:26 GMT-0500");
+
+                const [startHour] = start; // [startHour, startMinute]
+                const [endHour] = end; // [endHour, endMinute]
+                const currentHour = now.getHours();
+
+                // TODO: Add minute accuracy - check for hour AND minute instead of just hour.
+
+                // const currentMinute = now.getMinutes();
+                // const minuteIsOutOfRange = currentMinute < startMinute && currentMinute > endMinute;
+
+                // console.log(`${currentHour} > ${startHour} && ${currentHour} < ${endHour}`); // For future testing
+                const isHourInRange =
+                    currentHour > startHour && currentHour < endHour;
+
+                shouldRefresh = isHourInRange;
+            }
+
+            shouldRefresh = shouldRefresh
+                ? getFromStorage("settings").autoUpdate
+                : false;
+            if (shouldRefresh) {
                 getAndSetData();
             }
         }, 60 * 1000);

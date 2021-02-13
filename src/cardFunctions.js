@@ -29,14 +29,9 @@ const tenfastfingers = (cardInfo) => {
 
     const getData = async () => {
         let myHeaders = new Headers();
-
-        headersArray.forEach((header) => {
-            if (header[0] === "referer") {
-                myHeaders.append(header[0], header[1] + cardInfo.data[0]);
-            } else {
-                myHeaders.append(header[0], header[1]);
-            }
-        });
+        headersArray.forEach((header) =>
+            myHeaders.append(header[0], header[1])
+        );
 
         try {
             const { avg_norm, languages_sorted } = await fetch(
@@ -249,6 +244,9 @@ const crypto = (cardInfo) => {
     })();
 };
 
+// the refreshPeriod object's start and end properties are hours and minutes in an array
+// that determine if a card should auto-refresh. the purpose of this is to avoid unnecesary
+// refreshes. for when the stock market isn't open there is no need to refresh yahoofinance
 export const SITE_INFO = {
     "10fastfingers": {
         fn: tenfastfingers,
@@ -289,6 +287,10 @@ export const SITE_INFO = {
         fn: yahoofinance,
         dataTypes: ["Stock Ticker Symbol"],
         refreshInterval: 1 * 60,
+        refreshPeriod: {
+            start: [9, 30],
+            end: [16, 0],
+        },
         needsAuth: false,
         hasDocs: false,
     },
