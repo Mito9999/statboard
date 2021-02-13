@@ -31,13 +31,14 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                 const {
                     refreshPeriod: { start, end },
                 } = SITE_INFO[cardInfo.site];
-                const now = new Date("Fri Feb 12 2021 14:36:26 GMT-0500");
+                const now = new Date();
 
                 const [startHour] = start; // [startHour, startMinute]
                 const [endHour] = end; // [endHour, endMinute]
                 const currentHour = now.getHours();
 
                 // TODO: Add minute accuracy - check for hour AND minute instead of just hour.
+                // TODO: Add support for other time zones.
 
                 // const currentMinute = now.getMinutes();
                 // const minuteIsOutOfRange = currentMinute < startMinute && currentMinute > endMinute;
