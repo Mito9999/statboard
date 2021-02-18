@@ -12,14 +12,14 @@
     flex-direction: column;
     justify-content: space-evenly;
     border-radius: 25px;
-    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.295);
     transition: all 120ms ease-in;
     transition-property: transform, box-shadow;
 }
 
 .hovered {
     transform: scale(1.03);
-    box-shadow: 5px 10px 30px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 8px 15px 0px rgba(0, 0, 0, 0.295);
 }
 
 .card--data {
