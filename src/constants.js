@@ -41,6 +41,21 @@ export const initialCards = [
         data: ["BTC"],
         id: nanoid(),
     },
+    {
+        site: "10fastfingers",
+        data: ["2069581"],
+        id: nanoid(),
+    },
+    {
+        site: "crypto",
+        data: ["ETH"],
+        id: nanoid(),
+    },
+    {
+        site: "weather",
+        data: ["85001"],
+        id: nanoid(),
+    },
 ];
 
 export const searchData = [
