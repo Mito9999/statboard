@@ -12,6 +12,9 @@
     flex-direction: column;
     justify-content: space-evenly;
     border-radius: 25px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.295);
     transition: all 120ms ease-in;
     transition-property: transform, box-shadow;
