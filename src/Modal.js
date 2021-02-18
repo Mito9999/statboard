@@ -22,7 +22,7 @@ const X_STYLES = {
     fontSize: "2rem",
 };
 
-export default function AddModal(props) {
+export default function Modal(props) {
     const { children, open, close, ...restProps } = props;
     const context = useContext(MainContext);
 

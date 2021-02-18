@@ -24,7 +24,7 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
 
     useEffect(() => {
         getAndSetData();
-        const minuteTimerID = setInterval(() => {
+        const refreshIntervalID = setInterval(() => {
             let shouldRefresh = true;
 
             if (SITE_INFO[cardInfo.site].refreshPeriod) {
@@ -56,10 +56,10 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
             if (shouldRefresh) {
                 getAndSetData();
             }
-        }, 60 * 1000);
+        }, SITE_INFO[cardInfo.site].refreshInterval);
 
         return () => {
-            clearInterval(minuteTimerID);
+            clearInterval(refreshIntervalID);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
