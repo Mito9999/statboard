@@ -68,12 +68,12 @@ export const searchData = [
 ];
 
 export const selectDropdownStyles = (theme) => ({
-    option: (provided, state) => ({
+    option: (provided) => ({
         ...provided,
         color: theme.text,
         backgroundColor: theme.background,
     }),
-    control: (base, state) => ({
+    control: (base) => ({
         ...base,
         color: theme.text,
         backgroundColor: theme.background,

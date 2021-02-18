@@ -35,6 +35,7 @@ export default function Modal(props) {
         color: context.theme.text,
         padding: "50px",
         zIndex: 1000,
+        minWidth: "400px",
     };
 
     return ReactDOM.createPortal(

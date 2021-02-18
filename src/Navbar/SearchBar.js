@@ -25,7 +25,10 @@ export default function SearchBar() {
                         setSearch(value);
                     }}
                 />
-                <MdSearch style={{ fontSize: "2em", cursor: "pointer" }} />
+                <MdSearch
+                    style={{ fontSize: "2em", cursor: "pointer" }}
+                    onClick={(e) => submitSearch(e, search, searchData)}
+                />
             </form>
         </div>
     );

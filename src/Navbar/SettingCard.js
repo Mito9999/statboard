@@ -8,7 +8,6 @@ export default function SettingCard({ text, value }) {
         <div
             style={{
                 display: "flex",
-                width: "250px",
                 marginBottom: "15px",
                 alignItems: "center",
                 justifyContent: "space-between",
