@@ -61,3 +61,16 @@ span .dollar {
         width: 90%;
     }
 }
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(359.99deg);
+    }
+}
+
+.refresh-spinning {
+    animation: spinner 1s linear infinite;
+}

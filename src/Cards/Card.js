@@ -9,17 +9,24 @@ import { MdRefresh, MdClose } from "react-icons/md";
 const Card = ({ cardInfo, removeCard, ...restProps }) => {
     const context = useContext(MainContext);
     const [data, setData] = useState(handleEmptyData("Loading..."));
+    const [isLoading, setIsLoading] = useState(true);
     const [hovered, setHovered] = useState(false);
 
+    const siteInfo = SITE_INFO[cardInfo.site];
+
     const getAndSetData = async () => {
+        setIsLoading(true);
+
         const prevData = data;
         try {
-            const siteInfo = await SITE_INFO[cardInfo.site].fn(cardInfo);
-            setData(siteInfo);
+            const siteData = await siteInfo.fn(cardInfo);
+            setData(siteData);
         } catch (err) {
-            setData(prevData);
             console.log(err);
+            setData(prevData);
         }
+
+        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -27,10 +34,10 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
         const refreshIntervalID = setInterval(() => {
             let shouldRefresh = true;
 
-            if (SITE_INFO[cardInfo.site].refreshPeriod) {
+            if (siteInfo.refreshPeriod) {
                 const {
                     refreshPeriod: { start, end },
-                } = SITE_INFO[cardInfo.site];
+                } = siteInfo;
                 const now = new Date();
 
                 const [startHour] = start; // [startHour, startMinute]
@@ -50,13 +57,13 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                 shouldRefresh = isHourInRange;
             }
 
-            shouldRefresh = shouldRefresh
+            shouldRefresh = true
                 ? getFromStorage("settings").autoUpdate
                 : false;
             if (shouldRefresh) {
                 getAndSetData();
             }
-        }, SITE_INFO[cardInfo.site].refreshInterval);
+        }, siteInfo.refreshInterval);
 
         return () => {
             clearInterval(refreshIntervalID);
@@ -93,6 +100,7 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                         setData(handleEmptyData("Loading..."));
                         getAndSetData();
                     }}
+                    className={isLoading ? "refresh-spinning" : "refresh"}
                 />
             </div>
         </div>

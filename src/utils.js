@@ -68,7 +68,15 @@ export const submitSearch = (event, searchString, sitesArray) => {
 };
 
 export const handleEmptyData = (text = "Error", text2 = text, text3 = text) => {
-    return [<>{text}</>, <>{text2}</>, <>{text3}</>];
+    return [
+        <>{text}</>,
+        <>
+            <div style={{ height: "39px" }}>{text2}</div>
+        </>,
+        <>
+            <div style={{ height: "39px" }}>{text3}</div>
+        </>,
+    ];
 };
 
 export const createCardFunction = (URL, cardInfo, texts) => {

@@ -19,7 +19,7 @@ export default function SearchBar() {
                     className="input"
                     style={{
                         marginRight: "15px",
-                        border: `4px solid ${theme.card}`,
+                        border: `2.5px solid ${theme.card}`,
                     }}
                     onChange={({ target: { value } }) => {
                         setSearch(value);

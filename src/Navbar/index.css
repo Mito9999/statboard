@@ -26,6 +26,7 @@
 
 .top-search-bar input {
     margin-top: 0px;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.295);
 }
 
 @media (max-width: 750px) {
