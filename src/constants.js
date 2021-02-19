@@ -32,34 +32,34 @@ export const initialRefresh = {
 
 export const initialCards = [
     {
+        id: nanoid(),
         site: "yahoofinance",
         data: ["AMD"],
-        id: nanoid(),
     },
     {
+        id: nanoid(),
         site: "weather",
         data: ["10001"],
-        id: nanoid(),
     },
     {
+        id: nanoid(),
         site: "crypto",
         data: ["BTC"],
-        id: nanoid(),
     },
     {
+        id: nanoid(),
         site: "10fastfingers",
         data: ["2069581"],
-        id: nanoid(),
     },
     {
+        id: nanoid(),
         site: "crypto",
         data: ["ETH"],
-        id: nanoid(),
     },
     {
+        id: nanoid(),
         site: "weather",
         data: ["85001"],
-        id: nanoid(),
     },
 ];
 

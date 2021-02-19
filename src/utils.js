@@ -1,3 +1,5 @@
+import { saveAs } from "file-saver";
+
 const stringToObjectProperty = (path, obj) => {
     return path
         .split(".")
@@ -10,6 +12,15 @@ export const getFromStorage = (key) => {
 
 export const saveToStorage = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
+};
+
+export const exportData = (data, name) => {
+    const file = new Blob([JSON.stringify(data)], {
+        type: "application/json",
+        name,
+    });
+
+    saveAs(file, name);
 };
 
 export const numberToOrdinalSuffix = (number) => {

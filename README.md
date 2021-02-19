@@ -10,8 +10,8 @@ Live Demo: https://statboard.vercel.app/
 -   [x] Auto Reload
 -   [x] Dark and Light themes
 -   [x] Search Commands (ex. `?yt React.js` will search YouTube for React.js videos in a new tab)
--   [ ] Individual Card Settings
 -   [ ] Card Stat Goals
+-   [ ] Individual Card Settings
 -   [ ] Editable Card Info
 -   [ ] User Authentication
     -   [ ] Device Sync
