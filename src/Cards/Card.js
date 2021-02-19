@@ -107,7 +107,9 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                 />
                 <MdRefresh
                     onClick={() => {
-                        getAndSetData();
+                        if (!isLoading) {
+                            getAndSetData();
+                        }
                     }}
                     className={isLoading ? "refresh-spinning" : "refresh"}
                 />
