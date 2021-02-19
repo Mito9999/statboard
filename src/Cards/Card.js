@@ -71,6 +71,19 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        if (context.refresh.shouldAllCardsRefresh) {
+            try {
+                console.log("Refreshing:", cardInfo.site);
+                getAndSetData();
+            } catch {
+                console.log("Failed to refresh:", cardInfo.site);
+            }
+            context.refresh.setShouldAllCardsRefresh(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [context]);
+
     return (
         <div
             {...restProps}

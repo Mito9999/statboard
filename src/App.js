@@ -20,6 +20,7 @@ const getCardsFromStorage = () => {
 
 function App() {
     const [cards, setCards] = useState(getCardsFromStorage());
+    const [shouldAllCardsRefresh, setShouldAllCardsRefresh] = useState(false);
 
     const [settingsData, setSettingsData] = useState({
         ...initialSettings,
@@ -53,6 +54,10 @@ function App() {
                 cards: {
                     data: cards,
                     setCards,
+                },
+                refresh: {
+                    shouldAllCardsRefresh,
+                    setShouldAllCardsRefresh,
                 },
             }}
         >

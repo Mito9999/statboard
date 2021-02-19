@@ -25,6 +25,11 @@ export const initialSettings = {
     lightMode: false,
 };
 
+export const initialRefresh = {
+    shouldAllCardsRefresh: false,
+    setShouldAllCardsRefresh: () => null,
+};
+
 export const initialCards = [
     {
         site: "yahoofinance",
