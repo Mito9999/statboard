@@ -57,10 +57,7 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                 shouldRefresh = isHourInRange;
             }
 
-            shouldRefresh = true
-                ? getFromStorage("settings").autoUpdate
-                : false;
-            if (shouldRefresh) {
+            if (shouldRefresh && getFromStorage("settings").autoUpdate) {
                 getAndSetData();
             }
         }, siteInfo.refreshInterval);
@@ -77,7 +74,7 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                 console.log("Refreshing:", cardInfo.site);
                 getAndSetData();
             } catch {
-                console.log("Failed to refresh:", cardInfo.site);
+                console.error("Failed to refresh:", cardInfo.site);
             }
             context.refresh.setShouldAllCardsRefresh(false);
         }
@@ -110,7 +107,6 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
                 />
                 <MdRefresh
                     onClick={() => {
-                        setData(handleEmptyData("Loading..."));
                         getAndSetData();
                     }}
                     className={isLoading ? "refresh-spinning" : "refresh"}
