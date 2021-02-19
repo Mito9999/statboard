@@ -20,10 +20,20 @@ export default function SettingsModal({
             ))}
             <button
                 onClick={() =>
-                    exportData(getFromStorage("cards"), "cards.json")
+                    exportData(getFromStorage("cards"), "statboard-cards.json")
                 }
             >
                 Export Cards
+            </button>
+            <button
+                onClick={() =>
+                    exportData(
+                        getFromStorage("settings"),
+                        "statboard-settings.json"
+                    )
+                }
+            >
+                Export Settings
             </button>
         </Modal>
     );
