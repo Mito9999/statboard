@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "../Modal";
 import { settingsArray } from "../constants";
-import { getFromStorage, exportData } from "../utils";
+import { getFromStorage, importData, exportData } from "../utils";
 
 import SettingCard from "./SettingCard";
 
@@ -18,6 +18,11 @@ export default function SettingsModal({
             {settingsArray.map(({ text, value }) => (
                 <SettingCard key={value} text={text} value={value} />
             ))}
+            <input
+                onChange={(e) => importData(e, "cards")}
+                type="file"
+                accpet=".json"
+            />
             <button
                 onClick={() =>
                     exportData(getFromStorage("cards"), "statboard-cards.json")

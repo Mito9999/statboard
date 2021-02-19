@@ -11,7 +11,11 @@ export const getFromStorage = (key) => {
 };
 
 export const saveToStorage = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (typeof value === "string") {
+        localStorage.setItem(key, value);
+    } else {
+        localStorage.setItem(key, JSON.stringify(value));
+    }
 };
 
 export const exportData = (data, name) => {
@@ -21,6 +25,16 @@ export const exportData = (data, name) => {
     });
 
     saveAs(file, name);
+};
+
+export const importData = (e, storageKey) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        saveToStorage(storageKey, event.target.result);
+    };
+
+    reader.readAsText(file);
 };
 
 export const numberToOrdinalSuffix = (number) => {
