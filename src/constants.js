@@ -21,8 +21,12 @@ export const theme = {
 };
 
 export const initialSettings = {
-    autoUpdate: false,
-    lightMode: false,
+    data: {
+        autoUpdate: false,
+        lightMode: false,
+    },
+    setSettingsData: () => {},
+    handleSettingsUpdate: () => {},
 };
 
 export const initialRefresh = {

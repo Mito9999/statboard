@@ -49,6 +49,7 @@ function App() {
                 theme: themeValue,
                 settings: {
                     data: settingsData,
+                    setSettingsData,
                     handleSettingsUpdate,
                 },
                 cards: {

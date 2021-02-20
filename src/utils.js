@@ -27,16 +27,6 @@ export const exportData = (data, name) => {
     saveAs(file, name);
 };
 
-export const importData = (e, storageKey) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (event) => {
-        saveToStorage(storageKey, event.target.result);
-    };
-
-    reader.readAsText(file);
-};
-
 export const numberToOrdinalSuffix = (number) => {
     // Only returns the suffix, without the number
     const ordinalRules = new Intl.PluralRules("en", {
