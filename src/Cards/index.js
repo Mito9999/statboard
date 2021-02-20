@@ -1,7 +1,13 @@
 import React, { useContext } from "react";
+import styled from "styled-components";
 import MainContext from "../context";
 
 import Card from "./Card";
+
+const AllCards = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
 
 export default function Cards() {
     const { theme, cards } = useContext(MainContext);
@@ -12,7 +18,7 @@ export default function Cards() {
     };
 
     return (
-        <div className="all-cards" style={{ color: theme.text }}>
+        <AllCards style={{ color: theme.text }}>
             {cards.data.map((cardInfo) => (
                 <Card
                     key={cardInfo.id}
@@ -21,6 +27,6 @@ export default function Cards() {
                     removeCard={removeCard}
                 />
             ))}
-        </div>
+        </AllCards>
     );
 }

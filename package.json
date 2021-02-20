@@ -2,6 +2,9 @@
     "name": "dashboard",
     "version": "0.1.0",
     "private": true,
+    "resolutions": {
+        "styled-components": "^5"
+    },
     "dependencies": {
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
@@ -14,6 +17,7 @@
         "react-scripts": "4.0.1",
         "react-select": "^4.0.2",
         "react-switch": "^6.0.0",
+        "styled-components": "^5.2.1",
         "web-vitals": "^0.2.4"
     },
     "scripts": {
