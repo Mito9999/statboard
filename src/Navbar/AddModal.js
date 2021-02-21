@@ -8,6 +8,33 @@ import { SITE_INFO } from "../cardFunctions";
 import { selectDropdownStyles } from "../constants";
 import MainContext from "../context";
 
+import styled from "styled-components";
+
+const Input = styled.input`
+    height: 38px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    margin-top: 8px;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+`;
+
+const PlusButton = styled.div`
+    height: 38px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    margin-top: 8px;
+    outline: none;
+    padding: 8px;
+    font-size: 2em;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 const defaultFormData = { site: "10fastfingers", data: [] };
 
 export default function AddModal({
@@ -76,33 +103,22 @@ export default function AddModal({
                 onSubmit={makeNewCard}
             >
                 {SITE_INFO[formData.site].dataTypes.map((dataType, index) => (
-                    <input
-                        className="input"
+                    <Input
                         key={formData.site + dataType}
                         type="text"
                         value={formData.data[index] || ""}
                         onChange={(e) => {
                             handleSiteInputChange(e, index);
                         }}
-                        style={{ width: "100%" }}
                         placeholder={dataType}
                     />
                 ))}
-                <div
+                <PlusButton
                     onClick={makeNewCard}
-                    className="input"
-                    style={{
-                        fontSize: "2em",
-                        cursor: "pointer",
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: theme.card,
-                    }}
+                    style={{ backgroundColor: theme.card }}
                 >
                     <MdAdd />
-                </div>
+                </PlusButton>
             </form>
         </Modal>
     );

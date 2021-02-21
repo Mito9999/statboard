@@ -25,7 +25,7 @@ const Card = ({ cardInfo, removeCard, ...restProps }) => {
             setData(prevData);
         }
 
-        setTimeout(() => setIsLoading(false), 50); // TEMP FIX for when data is cached, just to show that the click has been registered
+        setTimeout(() => setIsLoading(false), 100); // TEMP FIX for when data is cached, just to show that the click has been registered
     };
 
     useEffect(() => {
