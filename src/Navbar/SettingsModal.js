@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Modal from "../Modal";
-import { settingsArray } from "../constants";
+import { settingsArray, initialSettings } from "../constants";
 import { getFromStorage, exportData } from "../utils";
 
 import SettingCard from "./SettingCard";
@@ -56,6 +56,16 @@ export default function SettingsModal({
                 }
             >
                 Export Settings
+            </button>
+            <button
+                onClick={() => {
+                    settings.setSettingsData((prev) => ({
+                        ...prev,
+                        ...initialSettings.data,
+                    }));
+                }}
+            >
+                Reset Settings
             </button>
         </Modal>
     );

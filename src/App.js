@@ -23,7 +23,7 @@ function App() {
     const [shouldAllCardsRefresh, setShouldAllCardsRefresh] = useState(false);
 
     const [settingsData, setSettingsData] = useState({
-        ...initialSettings,
+        ...initialSettings.data,
         ...getFromStorage("settings"),
     }); // gets the default settings, overrides some of them with the user-selected settings
 
@@ -41,6 +41,7 @@ function App() {
     useEffect(() => {
         saveToStorage("cards", cards);
         saveToStorage("settings", settingsData);
+        console.log("CONTEXT UPDATE");
     }, [cards, settingsData]);
 
     return (
