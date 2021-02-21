@@ -11,11 +11,21 @@ export default function SettingsModal({
 }) {
     const { cards, settings } = useContext(MainContext);
 
-    const importData = (e, updateFunction) => {
+    const importData = (e, data) => {
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.onload = (event) => {
-            updateFunction(JSON.parse(event.target.result));
+            if (e.target.name === "import-cards") {
+                const currentCardIDs = cards.data.map((card) => card.id);
+                const cardsFromFile = JSON.parse(event.target.result);
+                const newCards = cardsFromFile.filter(
+                    (card) => !currentCardIDs.includes(card.id)
+                );
+
+                data.setCards((prev) => [...prev, ...newCards]);
+            } else if (e.target.name === "import-settings") {
+                data.setSettingsData(JSON.parse(event.target.result));
+            }
         };
 
         reader.readAsText(file);
@@ -31,7 +41,8 @@ export default function SettingsModal({
                 <SettingCard key={value} text={text} value={value} />
             ))}
             <input
-                onChange={(e) => importData(e, cards.setCards)}
+                name="import-cards"
+                onChange={(e) => importData(e, cards)}
                 type="file"
                 accpet=".json"
             />
@@ -43,7 +54,8 @@ export default function SettingsModal({
                 Export Cards
             </button>
             <input
-                onChange={(e) => importData(e, settings.setSettingsData)}
+                name="import-settings"
+                onChange={(e) => importData(e, settings)}
                 type="file"
                 accpet=".json"
             />

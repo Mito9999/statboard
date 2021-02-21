@@ -41,7 +41,6 @@ function App() {
     useEffect(() => {
         saveToStorage("cards", cards);
         saveToStorage("settings", settingsData);
-        console.log("CONTEXT UPDATE");
     }, [cards, settingsData]);
 
     return (

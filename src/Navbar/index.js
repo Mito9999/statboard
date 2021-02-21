@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import "./index.css";
-
 import SearchBar from "./SearchBar";
 import Logo from "./Logo";
 import Icons from "./Icons";
