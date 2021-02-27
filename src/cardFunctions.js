@@ -84,6 +84,11 @@ const ethermine = (cardInfo) => {
                 `https://api.ethermine.org/miner/${cardInfo.data[0]}/currentStats`
             );
             const res = await data.json();
+
+            if (res.data === "NO DATA") {
+                return handleEmptyData("ethermine", "Error", "Error");
+            }
+
             return [
                 <>{cardInfo.site}</>,
                 <>
