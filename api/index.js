@@ -1,11 +1,11 @@
 const app = require("express")();
 const helmet = require("helmet");
-const cors = require("cors");
+// const cors = require("cors");
 const corsAnywhere = require("cors-anywhere");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
-app.use(cors());
+// app.use(cors());
 app.use(helmet());
 
 app.get("/api/weather", async (req, res) => {
